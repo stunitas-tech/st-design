@@ -2,7 +2,7 @@
   "name": "@conects-design/project",
   "scripts": {
     "docs:dev": "pnpm --dir docs dev",
-    "figma:sync": "tsx --tsconfig tsconfig.headless.json scripts/figma/generate-registry.ts",
+    "figma:sync": "bun run ./scripts/figma-registry.ts",
     "tokens:generate": "tsx scripts/generate-registry.ts"
   },
   "version": "0.0.0",
