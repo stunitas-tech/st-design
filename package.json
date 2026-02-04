@@ -1,17 +1,18 @@
 {
-  "name": "@conects-design/project",
-  "scripts": {
-    "docs:dev": "pnpm --dir docs dev",
-    "figma:sync": "bun run ./scripts/figma-registry.ts",
-    "tokens:generate": "tsx scripts/generate-registry.ts"
-  },
-  "version": "0.0.0",
-  "private": true,
-  "devDependencies": {
-    "@types/node": "^25.0.3"
-  },
-  "dependencies": {
-    "@figma/rest-api-spec": "^0.35.0",
-    "figma-api": "^2.1.0-beta"
-  }
+    "name": "@conects-design/project",
+    "scripts": {
+        "docs:install": "bun install --cwd docs",
+        "docs:dev": "bun run docs:install && bun --cwd docs dev",
+        "figma:sync": "bun run ./scripts/figma-registry.ts",
+        "tokens:generate": "tsx scripts/generate-registry.ts"
+    },
+    "version": "0.0.0",
+    "private": true,
+    "devDependencies": {
+        "@types/node": "^25.0.3"
+    },
+    "dependencies": {
+        "@figma/rest-api-spec": "^0.35.0",
+        "figma-api": "^2.1.0-beta"
+    }
 }
