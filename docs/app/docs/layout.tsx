@@ -10,7 +10,7 @@ export default function Layout({ children }: LayoutProps<"/docs">) {
             search={{
                 SearchDialog: DefaultSearchDialog,
                 options: {
-                    defaultTag: TAGS.design.value,
+                    // defaultTag: TAGS.design.value,
                     tags: Object.values(TAGS),
                 },
             }}

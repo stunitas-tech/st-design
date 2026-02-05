@@ -3,8 +3,8 @@
     "scripts": {
         "docs:install": "bun install --cwd docs",
         "docs:dev": "bun run docs:install && bun --cwd docs dev",
-        "figma:sync": "bun run ./scripts/figma-registry.ts",
-        "tokens:generate": "tsx scripts/generate-registry.ts"
+        "docs:push": "bun run ./scripts/docs-push.ts",
+        "figma:sync": "bun install && bun run ./scripts/figma-registry.ts"
     },
     "version": "0.0.0",
     "private": true,

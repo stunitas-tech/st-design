@@ -1,3 +1,4 @@
+import { fileGenerator, remarkDocGen } from "fumadocs-docgen";
 import {
     defineConfig,
     defineDocs,
@@ -35,6 +36,6 @@ export const gongsoop = defineDocs({
 
 export default defineConfig({
     mdxOptions: {
-        // MDX options
+        remarkPlugins: [[remarkDocGen, { generators: [fileGenerator()] }]],
     },
 });

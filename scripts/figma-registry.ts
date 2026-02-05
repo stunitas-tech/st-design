@@ -17,7 +17,7 @@ function writeTokens(name: string, data: unknown) {
 
     fs.writeFileSync(
         path.join(TOKENS_DIR, `${name}.json`),
-        JSON.stringify(data, null, 2)
+        JSON.stringify(data, null, 2),
     );
 }
 
@@ -28,7 +28,7 @@ function writeIndex(files: string[]) {
 
     fs.writeFileSync(
         path.join(TOKENS_DIR, "index.json"),
-        JSON.stringify(index, null, 2)
+        JSON.stringify(index, null, 2),
     );
 }
 
@@ -110,14 +110,14 @@ function rgbaToHex({ r, g, b }: RGBA) {
 export async function figmaToToken() {
     if (!FIGMA_TOKEN) {
         console.warn(
-            "FIGMA_PERSONAL_ACCESS_TOKEN 환경변수가 설정되지 않았습니다. 스타일 추출을 건너뜁니다."
+            "FIGMA_PERSONAL_ACCESS_TOKEN 환경변수가 설정되지 않았습니다. 스타일 추출을 건너뜁니다.",
         );
         return [];
     }
 
     if (!FIGMA_FILE_KEY) {
         console.warn(
-            "FIGMA_FILE_KEY 환경변수가 설정되지 않았습니다. 스타일 추출을 건너뜁니다."
+            "FIGMA_FILE_KEY 환경변수가 설정되지 않았습니다. 스타일 추출을 건너뜁니다.",
         );
         return [];
     }
@@ -135,17 +135,17 @@ export async function figmaToToken() {
 
         const variablesFrame = file.document.children
             .flatMap((page: Node) =>
-                page.type === "CANVAS" ? page.children ?? [] : []
+                page.type === "CANVAS" ? (page.children ?? []) : [],
             )
             .find(
                 (node: Node) =>
                     node.type === "FRAME" &&
-                    node.name === "Variables Documentation"
+                    node.name === "Variables Documentation",
             ) as CanvasWithChildren;
 
         // const palette = variablesFrame?.children?.[0] as NodeWithChildren;
         const collectionPalette = variablesFrame.children?.find(
-            (n) => n.type === "FRAME" && n.name === "Collection Palette"
+            (n) => n.type === "FRAME" && n.name === "Collection Palette",
         ) as NodeWithChildren;
 
         const rows = extractPaletteRows(collectionPalette);
@@ -153,9 +153,11 @@ export async function figmaToToken() {
         // console.log(rows);
         writeTokens("colors", rows);
         writeIndex(["colors"]);
-
+        console.log(rows);
+        console.log("--- 완료 ---");
         return rows;
     } catch (error) {
+        console.log(FIGMA_FILE_KEY);
         console.warn("Figma 파일를 가져오는데 실패했습니다:", error);
         return [];
     }

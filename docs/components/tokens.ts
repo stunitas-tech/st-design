@@ -11,12 +11,12 @@ type Token = {
 };
 
 export async function getTokens(): Promise<Token[]> {
-    const baseDir = path.join(process.cwd(), "public/tokens");
+    const baseDir = path.join(process.cwd(), "../public/tokens");
 
     // 1️⃣ index.json 읽기
     const indexRaw = await fs.readFile(
         path.join(baseDir, "index.json"),
-        "utf-8"
+        "utf-8",
     );
     const index: TokenIndex = JSON.parse(indexRaw);
 
@@ -26,7 +26,7 @@ export async function getTokens(): Promise<Token[]> {
             const filePath = path.join(baseDir, resource.path);
             const raw = await fs.readFile(filePath, "utf-8");
             return JSON.parse(raw) as Token[];
-        })
+        }),
     );
 
     // 3️⃣ 하나로 합침

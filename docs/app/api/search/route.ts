@@ -10,7 +10,6 @@ export const { staticGET: GET } = createSearchAPI("advanced", {
     indexes: () =>
         Promise.all([
             ...docsSource.getPages().map(async (page) => {
-                console.log("data", page.data.structuredData);
                 return {
                     id: page.url,
                     title: page.data.title,

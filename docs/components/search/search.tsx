@@ -57,7 +57,7 @@ export default function DefaultSearchDialog({
     tags = [],
     api,
     footer,
-    allowClear = false,
+    allowClear = true,
     ...props
 }: DefaultSearchDialogProps): ReactNode {
     const [tag, setTag] = useState(defaultTag);
@@ -68,7 +68,6 @@ export default function DefaultSearchDialog({
         tag,
     });
 
-    console.log("data", query.data);
     useOnChange(defaultTag, (v) => {
         setTag(v);
     });
@@ -87,9 +86,6 @@ export default function DefaultSearchDialog({
                     <SearchDialogInput />
                     <SearchDialogClose />
                 </SearchDialogHeader>
-                <SearchDialogList
-                    items={query.data !== "empty" ? query.data : null}
-                />
                 <SearchDialogFooter>
                     {tags.length > 0 && (
                         <TagsList
@@ -106,6 +102,9 @@ export default function DefaultSearchDialog({
                     )}
                     {footer}
                 </SearchDialogFooter>
+                <SearchDialogList
+                    items={query.data !== "empty" ? query.data : null}
+                />
             </SearchDialogContent>
         </SearchDialog>
     );
