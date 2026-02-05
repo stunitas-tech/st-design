@@ -1,5 +1,4 @@
-// import { reactSource, source, breezeSource, lynxSource } from "@/app/source";
-import { gongsoopSource, source } from "@/lib/source";
+import { docsSource, gongsoopSource } from "@/lib/source";
 import clsx from "clsx";
 import type { DocsLayoutProps } from "fumadocs-ui/layouts/notebook";
 import { File } from "lucide-react";
@@ -53,16 +52,6 @@ export const baseOptions: Omit<DocsLayoutProps, "tree"> = {
                     </SidebarTabIconContainer>
                 ),
             },
-            // {
-            //     title: "React",
-            //     description: "React 라이브러리",
-            //     url: "/react",
-            //     icon: (
-            //         <SidebarTabIconContainer className="[--tab-color:var(--react-color)]">
-            //             <Atom />
-            //         </SidebarTabIconContainer>
-            //     ),
-            // },
         ],
     },
     tabMode: "navbar",
@@ -93,7 +82,7 @@ export const baseOptions: Omit<DocsLayoutProps, "tree"> = {
 
 export const docsOptions: DocsLayoutProps = {
     ...baseOptions,
-    tree: source.pageTree,
+    tree: docsSource.pageTree,
 
     // tree: await source.getTransformedPageTree(),
 };

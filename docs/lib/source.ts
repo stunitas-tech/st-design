@@ -3,7 +3,7 @@ import { lucideIconsPlugin } from "fumadocs-core/source/lucide-icons";
 import { docs, gongsoop } from "fumadocs-mdx:collections/server";
 
 // See https://fumadocs.dev/docs/headless/source-api for more info
-export function getPageImage(page: InferPageType<typeof source>) {
+export function getPageImage(page: InferPageType<typeof docsSource>) {
     const segments = [...page.slugs, "image.png"];
 
     return {
@@ -12,7 +12,7 @@ export function getPageImage(page: InferPageType<typeof source>) {
     };
 }
 
-export async function getLLMText(page: InferPageType<typeof source>) {
+export async function getLLMText(page: InferPageType<typeof docsSource>) {
     const processed = await page.data.getText("processed");
 
     return `# ${page.data.title}
@@ -20,7 +20,7 @@ export async function getLLMText(page: InferPageType<typeof source>) {
   ${processed}`;
 }
 
-export const source = loader({
+export const docsSource = loader({
     baseUrl: "/docs",
     source: docs.toFumadocsSource(),
     plugins: [lucideIconsPlugin()],

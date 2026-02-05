@@ -1,6 +1,21 @@
+import DefaultSearchDialog from "@/components/search/search";
 import { DocsLayout } from "fumadocs-ui/layouts/notebook";
-import { gongsoopOptions } from "../layout.config";
+import { RootProvider } from "fumadocs-ui/provider/base";
+import { TAGS } from "../api/search/constants";
+import { docsOptions } from "../layout.config";
 
 export default function Layout({ children }: LayoutProps<"/docs">) {
-    return <DocsLayout {...gongsoopOptions}>{children}</DocsLayout>;
+    return (
+        <RootProvider
+            search={{
+                SearchDialog: DefaultSearchDialog,
+                options: {
+                    defaultTag: TAGS.gongsoop.value,
+                    tags: Object.values(TAGS),
+                },
+            }}
+        >
+            <DocsLayout {...docsOptions}>{children}</DocsLayout>
+        </RootProvider>
+    );
 }

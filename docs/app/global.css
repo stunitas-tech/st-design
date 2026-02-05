@@ -6,8 +6,6 @@
     width: auto !important;
 }
 
-#nd-page {
-}
 #nd-notebook-layout {
     --fd-sidebar-col: 268px !important;
     /* 1. 행(Rows) 설정: 헤더, 팝업, 메인 영역 순서 */

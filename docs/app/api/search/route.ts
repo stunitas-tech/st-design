@@ -1,7 +1,40 @@
-import { source } from '@/lib/source';
-import { createFromSource } from 'fumadocs-core/search/server';
+import { TAGS } from "@/app/api/search/constants";
+import { tokenize } from "@/components/search/tokenizer";
+import { docsSource, gongsoopSource } from "@/lib/source";
+import { AdvancedIndex, createSearchAPI } from "fumadocs-core/search/server";
 
-export const { GET } = createFromSource(source, {
-  // https://docs.orama.com/docs/orama-js/supported-languages
-  language: 'english',
+// it should be cached forever
+export const revalidate = false;
+
+export const { staticGET: GET } = createSearchAPI("advanced", {
+    indexes: () =>
+        Promise.all([
+            ...docsSource.getPages().map(async (page) => {
+                console.log("data", page.data.structuredData);
+                return {
+                    id: page.url,
+                    title: page.data.title,
+                    description: page.data.description,
+                    structuredData: page.data.structuredData,
+                    tag: TAGS.design.value,
+                    url: page.url,
+                } satisfies AdvancedIndex;
+            }),
+            ...gongsoopSource.getPages().map(async (page) => {
+                // const { structuredData } = await page.data.load();
+
+                return {
+                    id: page.url,
+                    title: page.data.title,
+                    description: page.data.description,
+                    structuredData: page.data.structuredData,
+                    tag: TAGS.gongsoop.value,
+                    url: page.url,
+                } satisfies AdvancedIndex;
+            }),
+        ]),
+    tokenizer: {
+        language: "english",
+        tokenize,
+    },
 });
