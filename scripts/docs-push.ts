@@ -57,10 +57,9 @@ function docsPush(): void {
         execSync("git add .", { stdio: "inherit" });
 
         try {
-            execSync(
-                `git commit -m "design: sync figma tokens (${timestamp})"`,
-                { stdio: "inherit" },
-            );
+            execSync(`git commit -m "design: docs update (${timestamp})"`, {
+                stdio: "inherit",
+            });
         } catch {
             console.log("✨ 변경된 토큰이 없습니다. 작업을 종료합니다.");
             execSync(`git checkout ${defaultBranch}`, { stdio: "ignore" });
