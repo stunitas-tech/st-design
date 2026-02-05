@@ -10,6 +10,7 @@ import { TypeTable } from "fumadocs-ui/components/type-table";
 import defaultMdxComponents from "fumadocs-ui/mdx";
 import type { MDXComponents } from "mdx/types";
 import { ComponentExample } from "./component-example";
+import { MdxExample } from "./mdx-example";
 
 export const mdxComponents: MDXComponents = {
     ...defaultMdxComponents,
@@ -45,6 +46,7 @@ export const mdxComponents: MDXComponents = {
     Pre,
     TypeTable,
     ComponentExample,
+    MdxExample,
     TokenReference,
 
     // Icons for MDX
