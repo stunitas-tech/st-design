@@ -1,7 +1,9 @@
 {
     "name": "@conects-design/project",
     "scripts": {
-        "docs:install": "bun install --cwd docs",
+        "install:root": "bun install",
+        "install:docs": "bun install --cwd docs",
+        "docs:install": "bun run install:root && bun run install:docs",
         "docs:dev": "bun run docs:install && bun --cwd docs dev",
         "docs:push": "bun run ./scripts/docs-push.ts",
         "figma:sync": "bun install && bun run ./scripts/figma-registry.ts"

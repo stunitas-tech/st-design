@@ -1,0 +1,17 @@
+{
+    "recommendations": [
+        "abusaidm.html-snippets",
+        "bradgashler.htmltagwrap",
+        "bradlc.vscode-tailwindcss",
+        "burkeholland.simple-react-snippets",
+        "dawhite.mustache",
+        "dbaeumer.vscode-eslint",
+        "dsznajder.es7-react-js-snippets",
+        "esbenp.prettier-vscode",
+        "formulahendry.auto-rename-tag",
+        "monokai.theme-monokai-pro-vscode",
+        "unifiedjs.vscode-mdx",
+        "usernamehw.errorlens",
+        "wooodhead.disable-eslint-rule"
+    ]
+}

@@ -1,0 +1,81 @@
+---
+title: 로컬 환경
+description: 로컬 환경 실행 방법
+dev: true
+---
+
+## 로컬 환경 세팅 방법
+
+<Steps>
+    <Step>
+    
+    ### Homebrew 설치
+    
+    ```bash
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    ```
+    
+    설치 확인
+    ```bash
+    brew --version
+    ```
+
+    </Step>
+    <Step>
+    ### Node.js 설치
+
+    nvm 설치
+
+    ```bash
+    brew install nvm
+    ```
+
+    zsh 설정
+
+    ```bash
+    mkdir ~/.nvm
+    echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.zshrc
+    echo '[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"' >> ~/.zshrc
+    source ~/.zshrc
+    ```
+
+    Node LTS 설치
+
+    ```bash
+    nvm install --lts
+    nvm use --lts
+    ```
+
+    설치 확인
+
+    ```bash
+    node -v
+    npm -v
+    ```
+    </Step>
+    <Step>
+    ### bun 설치
+
+    설치
+
+    ```bash
+    curl -fsSL https://bun.sh/install | bash
+    ```
+
+    설치 확인
+
+    ```bash
+    bun -v
+    ```
+    </Step>
+    <Step>
+    ### 로컬 실행
+
+    폴더에서 해당 명령어 실행
+
+    ```bash
+    bun run docs:dev
+    ```
+    </Step>
+
+</Steps>
