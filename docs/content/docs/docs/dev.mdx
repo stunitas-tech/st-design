@@ -1,8 +1,12 @@
 ---
 title: 로컬 환경
-description: 로컬 환경 실행 방법
+description: 로컬 환경 실행 방법입니다.
 dev: true
 ---
+
+export const repo = "https://github.com/stunitas-tech/st-design.git";
+
+<Callout>각 단계에서 버전 확인이 안될 경우 터미널을 껐다 켜주세요.</Callout>
 
 ## 로컬 환경 세팅 방법
 
@@ -15,16 +19,30 @@ dev: true
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     ```
     
-    설치 확인
+    Brew 버전 확인하여 설치 확인하기
     ```bash
     brew --version
     ```
 
     </Step>
     <Step>
+
+    ### Git 설치
+
+    ```bash
+    brew install git
+    ```
+
+    Git 버전 확인하여 설치 확인하기
+    ```bash
+    git --version
+    ```
+
+    </Step>
+    <Step>
     ### Node.js 설치
 
-    nvm 설치
+    노드 버전 매니저 설치
 
     ```bash
     brew install nvm
@@ -34,8 +52,14 @@ dev: true
 
     ```bash
     mkdir ~/.nvm
+    ```
+    ```bash
     echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.zshrc
+    ```
+    ```bash
     echo '[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"' >> ~/.zshrc
+    ```
+    ```bash
     source ~/.zshrc
     ```
 
@@ -43,6 +67,8 @@ dev: true
 
     ```bash
     nvm install --lts
+    ```
+    ```bash
     nvm use --lts
     ```
 
@@ -50,6 +76,8 @@ dev: true
 
     ```bash
     node -v
+    ```
+    ```bash
     npm -v
     ```
     </Step>
@@ -69,9 +97,19 @@ dev: true
     ```
     </Step>
     <Step>
-    ### 로컬 실행
+    ### 프로젝트 코드 클론 받기
 
-    폴더에서 해당 명령어 실행
+    workspace 폴더 생성 후에 프로젝트 클론받고 VSCode에서 열기
+
+    ```bash
+    git clone https://github.com/stunitas-tech/st-design.git
+    ```
+    </Step>
+
+    <Step>
+    ### 프로젝트 실행
+
+    VSCode에서 Ctrl + `(백틱) 눌러 터미널을 연 후, 아래 명령어 실행하기
 
     ```bash
     bun run docs:dev
