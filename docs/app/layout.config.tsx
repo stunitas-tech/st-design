@@ -33,7 +33,7 @@ export const baseOptions: Omit<DocsLayoutProps, "tree"> = {
     sidebar: {
         tabs: [
             {
-                title: "Docs",
+                title: "Dangi",
                 description: "단기 앱을 위한 디자인 언어",
                 url: "/docs",
                 icon: (

@@ -13,6 +13,7 @@
     },
     "dependencies": {
         "@figma/rest-api-spec": "^0.35.0",
-        "figma-api": "^2.1.0-beta"
+        "figma-api": "^2.1.0-beta",
+        "lucide-react": "^0.563.0"
     }
 }

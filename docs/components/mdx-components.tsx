@@ -8,6 +8,7 @@ import { Step, Steps } from "fumadocs-ui/components/steps";
 import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 import { TypeTable } from "fumadocs-ui/components/type-table";
 import defaultMdxComponents from "fumadocs-ui/mdx";
+import { Download, FileText } from "lucide-react";
 import type { MDXComponents } from "mdx/types";
 import { ComponentExample } from "./component-example";
 import { MdxExample } from "./mdx-example";
@@ -50,6 +51,8 @@ export const mdxComponents: MDXComponents = {
     TokenReference,
 
     // Icons for MDX
+    FileText,
+    Download,
 
     // Guidelines
     ImageZoom,

@@ -9,7 +9,7 @@ const REPO_URL = "https://github.com/stunitas-tech/st-design.git";
 /**
  * 반영할 특정 경로 리스트
  */
-const ALLOWED_PATHS = ["public/", "docs/content/"];
+const ALLOWED_PATHS = ["docs/public/", "docs/content/"];
 
 /**
  * 원격 저장소 설정 및 초기화

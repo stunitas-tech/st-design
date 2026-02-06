@@ -3,7 +3,7 @@ import { Api as FigmaApi } from "figma-api";
 import fs from "fs";
 import path from "node:path";
 
-const TOKENS_DIR = path.join(process.cwd(), "public/tokens");
+const TOKENS_DIR = path.join(process.cwd(), "docs/public/tokens");
 
 type CanvasWithChildren = Node & { children?: Node[] };
 

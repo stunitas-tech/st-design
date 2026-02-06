@@ -11,7 +11,7 @@ type Token = {
 };
 
 export async function getTokens(): Promise<Token[]> {
-    const baseDir = path.join(process.cwd(), "../public/tokens");
+    const baseDir = path.join(process.cwd(), "public/tokens");
 
     // 1️⃣ index.json 읽기
     const indexRaw = await fs.readFile(
