@@ -1,0 +1,183 @@
+---
+title: Markdown
+description: How to write documents
+---
+
+## Introduction
+
+이 문서는 파일을 추가하는 것만으로 자동으로 구조가 만들어지는 방식으로 구성되어 있습니다.  
+복잡한 설정 없이, 정해진 규칙만 지키면 문서가 자동으로 정리됩니다.
+
+### 문서 생성
+
+`docs/content` 폴더에서 추가가 필요한 경로에 `.mdx` 파일을 생성하여 문서 상단에 [Frontmatter](#frontmatter)를 작성하면,  
+해당 문서는 별도 추가 작업 없이 자동으로 사이드 메뉴에 추가됩니다.
+
+<Files>
+    <Folder name="docs" defaultOpen>
+        <Folder name="content" defaultOpen>
+            <Folder name="docs" defaultOpen>
+                <File name="new-document.mdx" />
+            </Folder>
+        </Folder>
+    </Folder>
+</Files>
+
+### 규칙
+
+1. 문서 파일은 docs/content 안에 생성합니다
+
+2. 문서 맨 위에는 [Frontmatter](#frontmatter)를 작성합니다
+
+3. 본문 제목은 ##부터 시작합니다
+
+4. 제목을 쓰면 목차는 자동으로 생성됩니다
+
+## MDX
+
+MDX는 일반적인 마크다운 문법을 그대로 사용하면서,  
+필요한 경우 버튼, 카드, 배너 같은 UI 컴포넌트를 문서 안에 직접 넣을 수 있도록 확장된 형식입니다.
+{/* We recommend MDX, a superset of Markdown with JSX syntax. It allows you to import components, and use them in the document, or even writing JavaScript. */}
+
+```mdx
+import { Component } from "./component";
+
+<Component name="Hello" />
+
+## Heading
+
+### Heading
+
+#### Heading
+
+Hello World, **Bold**, _Italic_, ~~Hidden~~
+
+1. First
+2. Second
+3. Third
+
+- Item 1
+- Item 2
+
+> Quote here
+
+![alt](/image.png)
+
+| Table | Description |
+| ----- | ----------- |
+| Hello | World       |
+```
+
+### Frontmatter
+
+Frontmatter는 문서의 제목과 설명 같은 기본 정보를 설정하는 영역입니다.  
+문서 맨 위에 작성하며, 이 정보를 사용해 페이지 제목과 UI를 구성합니다.
+
+- title은 Fumadocs 화면 및 사이드 메뉴에 표시되는 페이지 제목(H1) 입니다.
+- description은 문서의 간단한 설명으로, 목록이나 미리보기에서 사용됩니다.
+
+```mdx
+---
+title: Markdown
+description: How to write documents
+---
+```
+
+### TOC(목차)
+
+제목(Heading) 마크업 문법을 이용하면 아래와 같은 목차(TOC)가 우측에 자동으로 생성됩니다.
+
+<InlineTOC items={toc}>Table of Contents</InlineTOC>
+
+### Heading
+
+각 제목에 앵커가 자동으로 적용되며, 해시값에는 공백과 같은 유효하지 않은 문자는 제거됩니다.
+
+```mdx
+## Introduction
+
+### 문서생성
+
+### 목차
+```
+
+### Link
+
+문서 안에서 다른 페이지로 이동하는 내부 링크는 자동으로 최적화된 방식으로 연결됩니다.  
+외부 사이트로 연결되는 외부 링크는 보안을 위해 자동으로 새 탭에서 열리도록 처리됩니다.
+
+```mdx
+[링크 이동](https://github.com/stunitas-tech/st-design)
+
+링크 제목의 커스텀이 필요 없는 경우 링크만 넣어도 동작합니다:
+https://github.com/stunitas-tech/st-design.
+```
+
+## Markdown
+
+### List
+
+<Tabs items={["미리보기", "코드"]}>
+    <Tab value="미리보기">
+        
+        - 리스트1
+        - [리스트2](https://github.com/daangn/seed-design)
+        - 리스트3
+        - 리스트4
+
+    </Tab>
+    <Tab value="코드">
+
+       ```mdx
+        - 리스트1
+        - [리스트2](https://github.com/daangn/seed-design)
+        - 리스트3
+        - 리스트4
+
+        ```
+
+    </Tab>
+
+</Tabs>
+
+### Image
+
+<Tabs items={["미리보기", "코드"]}>
+    <Tab value="미리보기">
+        
+        ![이미지설명](/images/docs/example/example_image.webp)
+
+    </Tab>
+    <Tab value="코드">
+
+        ```mdx
+        ![이미지설명](/images/docs/example/example_image.webp)
+        ```
+
+    </Tab>
+
+</Tabs>
+
+### Table
+
+<Tabs items={["미리보기", "코드"]}>
+    <Tab value="미리보기">
+        
+        | 헤더 1 | 헤더 2 |
+        |-------|-------|
+        | 데이터 1 | 데이터 2 |
+        | 데이터 3 | 데이터 4 |
+
+    </Tab>
+    <Tab value="코드">
+
+        ```mdx
+        | 헤더 1 | 헤더 2 |
+        |-------|-------|
+        | 데이터 1 | 데이터 2 |
+        | 데이터 3 | 데이터 4 |
+        ```
+
+    </Tab>
+
+</Tabs>

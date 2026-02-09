@@ -1,9 +1,15 @@
 import { TokenReference } from "@/components/token-reference";
 import clsx from "clsx";
+import {
+    createFileSystemGeneratorCache,
+    createGenerator,
+} from "fumadocs-typescript";
+import { AutoTypeTable } from "fumadocs-typescript/ui";
 import { Accordion, Accordions } from "fumadocs-ui/components/accordion";
 import { CodeBlock, Pre } from "fumadocs-ui/components/codeblock";
 import { File, Files, Folder } from "fumadocs-ui/components/files";
 import { ImageZoom } from "fumadocs-ui/components/image-zoom";
+import { InlineTOC } from "fumadocs-ui/components/inline-toc";
 import { Step, Steps } from "fumadocs-ui/components/steps";
 import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 import { TypeTable } from "fumadocs-ui/components/type-table";
@@ -12,6 +18,11 @@ import { Download, FileText } from "lucide-react";
 import type { MDXComponents } from "mdx/types";
 import { ComponentExample } from "./component-example";
 import { MdxExample } from "./mdx-example";
+
+const generator = createGenerator({
+    // set a cache, necessary for serverless platform like Vercel
+    cache: createFileSystemGeneratorCache(".next/fumadocs-typescript"),
+});
 
 export const mdxComponents: MDXComponents = {
     ...defaultMdxComponents,
@@ -46,9 +57,13 @@ export const mdxComponents: MDXComponents = {
     CodeBlock,
     Pre,
     TypeTable,
+    AutoTypeTable: (props) => (
+        <AutoTypeTable {...props} generator={generator} />
+    ),
     ComponentExample,
     MdxExample,
     TokenReference,
+    InlineTOC,
 
     // Icons for MDX
     FileText,

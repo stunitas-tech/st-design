@@ -11,15 +11,18 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "fumadocs-core": "16.2.5",
+    "fumadocs-core": "^16.5.2",
     "fumadocs-docgen": "^3.0.5",
     "fumadocs-mdx": "14.1.1",
-    "fumadocs-ui": "16.2.5",
+    "fumadocs-twoslash": "^3.1.13",
+    "fumadocs-typescript": "^5.1.2",
+    "fumadocs-ui": "^16.5.2",
     "lucide-react": "^0.556.0",
     "next": "16.0.10",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
-    "react-error-boundary": "^6.1.0"
+    "react-error-boundary": "^6.1.0",
+    "twoslash": "^0.3.6"
   },
   "devDependencies": {
     "@figma/rest-api-spec": "^0.35.0",

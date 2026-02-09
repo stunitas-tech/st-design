@@ -1,3 +1,5 @@
+import { rehypeCodeDefaultOptions } from "fumadocs-core/mdx-plugins";
+import { remarkMdxFiles } from "fumadocs-core/mdx-plugins/remark-mdx-files";
 import { fileGenerator, remarkDocGen } from "fumadocs-docgen";
 import {
     defineConfig,
@@ -5,6 +7,7 @@ import {
     frontmatterSchema,
     metaSchema,
 } from "fumadocs-mdx/config";
+import { transformerTwoslash } from "fumadocs-twoslash";
 
 // You can customise Zod schemas for frontmatter and `meta.json` here
 // see https://fumadocs.dev/docs/mdx/collections
@@ -36,6 +39,22 @@ export const gongsoop = defineDocs({
 
 export default defineConfig({
     mdxOptions: {
-        remarkPlugins: [[remarkDocGen, { generators: [fileGenerator()] }]],
+        rehypeCodeOptions: {
+            themes: {
+                light: "github-light",
+                dark: "github-dark",
+            },
+            transformers: [
+                ...(rehypeCodeDefaultOptions.transformers ?? []),
+                transformerTwoslash(),
+            ],
+            // important: Shiki doesn't support lazy loading languages for codeblocks in Twoslash popups
+            // make sure to define them first (e.g. the common ones)
+            langs: ["js", "jsx", "ts", "tsx"],
+        },
+        remarkPlugins: [
+            [remarkDocGen, { generators: [fileGenerator()] }],
+            remarkMdxFiles,
+        ],
     },
 });

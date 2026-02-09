@@ -1,5 +1,7 @@
 import { mdxComponents } from "@/components/mdx-components";
 import { docsSource, getPageImage } from "@/lib/source";
+import { findSiblings } from "fumadocs-core/page-tree";
+import { Card, Cards } from "fumadocs-ui/components/card";
 import {
     DocsBody,
     DocsDescription,
@@ -21,9 +23,36 @@ export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
             <DocsTitle>{page.data.title}</DocsTitle>
             <DocsDescription>{page.data.description || ""}</DocsDescription>
             <DocsBody>
-                <MDX components={mdxComponents} />
+                <MDX
+                    components={{
+                        ...mdxComponents,
+                        DocsCategory: ({ url }) => {
+                            return <DocsCategory url={url ?? page.url} />;
+                        },
+                    }}
+                />
             </DocsBody>
         </DocsPage>
+    );
+}
+
+function DocsCategory({ url }: { url: string }) {
+    return (
+        <Cards>
+            {findSiblings(docsSource.getPageTree(), url).map((item) => {
+                if (item.type === "separator") return;
+                if (item.type === "folder") {
+                    if (!item.index) return;
+                    item = item.index;
+                }
+
+                return (
+                    <Card key={item.url} title={item.name} href={item.url}>
+                        {item.description}
+                    </Card>
+                );
+            })}
+        </Cards>
     );
 }
 

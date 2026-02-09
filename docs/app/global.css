@@ -13,7 +13,8 @@
     --color-fd-popover-foreground: #0f172a;
     --color-fd-border: #e2e8f0;
     --color-fd-input: #e2e8f0;
-    --color-fd-primary: #0f172a;
+    /* --color-fd-primary: #0f172a; */
+    --color-fd-primary: #297bff;
     --color-fd-primary-foreground: #f8fafc;
     --color-fd-secondary: #f1f5f9;
     --color-fd-secondary-foreground: #0f172a;
@@ -37,7 +38,8 @@
     --color-fd-card: #1a1a1a;
     --color-fd-card-foreground: #fafafa;
     --color-fd-border: #2e2e2e;
-    --color-fd-primary: #fafafa;
+    /* --color-fd-primary: #fafafa; */
+    --color-fd-primary: #a9ceff;
     --color-fd-primary-foreground: #171717;
     --color-fd-secondary: #212121;
     --color-fd-secondary-foreground: #fafafa;
