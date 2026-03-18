@@ -39,6 +39,5 @@ export async function getTokens(): Promise<TokenMap> {
 
     // 3️⃣ 배열을 객체로 변환 { palette: [...], palette2: [...] }
     const variables = Object.fromEntries(tokenEntries);
-    console.log(variables);
     return variables;
 }

@@ -27,9 +27,10 @@ export default function TokenValue({
                     <span
                         className="absolute left-0 top-0 w-full h-full"
                         style={{
-                            backgroundColor: !isPercent
-                                ? value
-                                : `rgba(0, 0, 0, ${perNum})`,
+                            backgroundColor:
+                                !isPercent && !isOpacity
+                                    ? value
+                                    : `rgba(0, 0, 0, ${perNum})`,
                             opacity: isOpacity ? Number(value) / 10 : 1,
                         }}
                     ></span>

@@ -13,15 +13,8 @@ export default function TokenRow({
     category: string;
     item: Token;
 }) {
-    const value = item?.value?.split(" ")[0];
-    const per = item?.value?.split(" ")[1];
-    const perNum = per?.replace(/[()]/g, "") || "100%";
-    const isPercent = perNum && perNum !== "100%";
-    const isOpacity = item?.name?.includes("Opacity");
-    const isColor = value?.startsWith("#");
-    const isAlias = item?.alias;
-
     const [isExpanded, setIsExpanded] = useState(false);
+    const isAlias = item?.alias;
 
     return (
         <tr

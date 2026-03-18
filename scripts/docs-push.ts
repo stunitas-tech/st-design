@@ -130,9 +130,12 @@ function docsPush(): void {
         }
 
         // 5. 커밋 및 푸시
-        execSync(`git commit -m "design: sync figma tokens (${timestamp})"`, {
-            stdio: "inherit",
-        });
+        execSync(
+            `git commit -m "design: sync figma tokens (${timestamp}) [skip ci]"`,
+            {
+                stdio: "inherit",
+            },
+        );
         console.log("🚀 GitHub으로 전송 중...");
         execSync(`git push origin ${branchName}`, { stdio: "inherit" });
 
