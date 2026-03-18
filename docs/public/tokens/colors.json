@@ -60,21 +60,6 @@
     "value": "#121212 (100%)"
   },
   {
-    "name": "Yellow/Yellow100",
-    "type": "Color",
-    "value": "#332700 (100%)"
-  },
-  {
-    "name": "Yellow/Yellow90",
-    "type": "Color",
-    "value": "#473700 (100%)"
-  },
-  {
-    "name": "Yellow/Yellow80",
-    "type": "Color",
-    "value": "#664E00 (100%)"
-  },
-  {
     "name": "Yellow/Yellow70",
     "type": "Color",
     "value": "#A37D00 (100%)"
@@ -113,21 +98,6 @@
     "name": "Yellow/Yellow60-low",
     "type": "Color",
     "value": "#B2A270 (100%)"
-  },
-  {
-    "name": "Orange/Orange100",
-    "type": "Color",
-    "value": "#421E00 (100%)"
-  },
-  {
-    "name": "Orange/Orange90",
-    "type": "Color",
-    "value": "#5C2900 (100%)"
-  },
-  {
-    "name": "Orange/Orange80",
-    "type": "Color",
-    "value": "#7A3700 (100%)"
   },
   {
     "name": "Orange/Orange70",
@@ -169,21 +139,7 @@
     "type": "Color",
     "value": "#B29077 (100%)"
   },
-  {
-    "name": "Red/Red100",
-    "type": "Color",
-    "value": "#520100 (100%)"
-  },
-  {
-    "name": "Red/Red90",
-    "type": "Color",
-    "value": "#770B09 (100%)"
-  },
-  {
-    "name": "Red/Red80",
-    "type": "Color",
-    "value": "#A50B09 (100%)"
-  },
+
   {
     "name": "Red/Red70",
     "type": "Color",
@@ -225,21 +181,6 @@
     "value": "#B2777E (100%)"
   },
   {
-    "name": "Magenta/Magenta100",
-    "type": "Color",
-    "value": "#560144 (100%)"
-  },
-  {
-    "name": "Magenta/Magenta90",
-    "type": "Color",
-    "value": "#6F0157 (100%)"
-  },
-  {
-    "name": "Magenta/Magenta80",
-    "type": "Color",
-    "value": "#940074 (100%)"
-  },
-  {
     "name": "Magenta/Magenta70",
     "type": "Color",
     "value": "#C10198 (100%)"
@@ -278,21 +219,6 @@
     "name": "Magenta/Magenta60-low",
     "type": "Color",
     "value": "#B277A9 (100%)"
-  },
-  {
-    "name": "Purple/Purple100",
-    "type": "Color",
-    "value": "#280543 (100%)"
-  },
-  {
-    "name": "Purple/Purple90",
-    "type": "Color",
-    "value": "#540873 (100%)"
-  },
-  {
-    "name": "Purple/Purple80",
-    "type": "Color",
-    "value": "#74009E (100%)"
   },
   {
     "name": "Purple/Purple70",
@@ -390,21 +316,6 @@
     "value": "#778DB2 (100%)"
   },
   {
-    "name": "Skyblue/Skyblue100",
-    "type": "Color",
-    "value": "#01262D (100%)"
-  },
-  {
-    "name": "Skyblue/Skyblue90",
-    "type": "Color",
-    "value": "#013F4C (100%)"
-  },
-  {
-    "name": "Skyblue/Skyblue80",
-    "type": "Color",
-    "value": "#015D6F (100%)"
-  },
-  {
     "name": "Skyblue/Skyblue70",
     "type": "Color",
     "value": "#0287A1 (100%)"
@@ -443,76 +354,6 @@
     "name": "Skyblue/Skyblue60-low",
     "type": "Color",
     "value": "#70A2B2 (100%)"
-  },
-  {
-    "name": "Mint/Mint100",
-    "type": "Color",
-    "value": "#014E45 (100%)"
-  },
-  {
-    "name": "Mint/Mint90",
-    "type": "Color",
-    "value": "#016459 (100%)"
-  },
-  {
-    "name": "Mint/Mint80",
-    "type": "Color",
-    "value": "#008475 (100%)"
-  },
-  {
-    "name": "Mint/Mint70",
-    "type": "Color",
-    "value": "#02A694 (100%)"
-  },
-  {
-    "name": "Mint/Mint60",
-    "type": "Color",
-    "value": "#02C5AE (100%)"
-  },
-  {
-    "name": "Mint/Mint50",
-    "type": "Color",
-    "value": "#02D9C1 (100%)"
-  },
-  {
-    "name": "Mint/Mint40",
-    "type": "Color",
-    "value": "#41E7D3 (100%)"
-  },
-  {
-    "name": "Mint/Mint30",
-    "type": "Color",
-    "value": "#73EDDF (100%)"
-  },
-  {
-    "name": "Mint/Mint20",
-    "type": "Color",
-    "value": "#B2F5ED (100%)"
-  },
-  {
-    "name": "Mint/Mint10",
-    "type": "Color",
-    "value": "#E6FCF9 (100%)"
-  },
-  {
-    "name": "Mint/Mint60-low",
-    "type": "Color",
-    "value": "#70B2AA (100%)"
-  },
-  {
-    "name": "Green/Green100",
-    "type": "Color",
-    "value": "#0C4E01 (100%)"
-  },
-  {
-    "name": "Green/Green90",
-    "type": "Color",
-    "value": "#0E6401 (100%)"
-  },
-  {
-    "name": "Green/Green80",
-    "type": "Color",
-    "value": "#128400 (100%)"
   },
   {
     "name": "Green/Green70",
@@ -558,41 +399,6 @@
     "name": "Alpha/Alpha5",
     "type": "Color",
     "value": "#000000 (5%)"
-  },
-  {
-    "name": "Opacity/0",
-    "type": "Number",
-    "value": "0"
-  },
-  {
-    "name": "Opacity/2",
-    "type": "Number",
-    "value": "2"
-  },
-  {
-    "name": "Opacity/4",
-    "type": "Number",
-    "value": "4"
-  },
-  {
-    "name": "Opacity/8",
-    "type": "Number",
-    "value": "8"
-  },
-  {
-    "name": "Opacity/40",
-    "type": "Number",
-    "value": "40"
-  },
-  {
-    "name": "Opacity/70",
-    "type": "Number",
-    "value": "70"
-  },
-  {
-    "name": "Opacity/80",
-    "type": "Number",
-    "value": "80"
   },
   {
     "name": "Alpha/Alpha10",
