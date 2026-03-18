@@ -6,5 +6,6 @@
     },
     "htmltagwrap.tag": "div",
     "htmltagwrap.autoDeselectClosingTag": true,
-    "errorLens.codeLensEnabled": false
+    "errorLens.codeLensEnabled": false,
+    "editor.tabSize": 4
 }

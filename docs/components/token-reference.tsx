@@ -1,16 +1,20 @@
 export const dynamic = "force-dynamic";
 
+import TokenRow from "./token-row";
 import { getTokens } from "./tokens";
 
 export async function TokenReference() {
-    const tokens = await getTokens();
-    console.log(tokens);
+    // 모든 토큰 그룹을 가져옵니다.
+    const tokenMap = await getTokens();
+
+    // 객체의 키(palette, semantic 등) 배열 추출
+    const categories = Object.keys(tokenMap);
 
     return (
         <table>
             <colgroup>
-                <col width="70%" />
-                <col width="30%" />
+                <col width="60%" />
+                <col width="40%" />
             </colgroup>
             <thead>
                 <tr>
@@ -19,26 +23,18 @@ export async function TokenReference() {
                 </tr>
             </thead>
             <tbody>
-                {tokens &&
-                    tokens.map((item) => {
-                        const value = item?.value.split(" ")[0];
+                {categories.map((category) =>
+                    tokenMap[category].map((item) => {
+                        // 값이 공백으로 구분된 경우(예: "#ffffff 100%") 첫 번째 값만 사용
                         return (
-                            <tr key={item?.name}>
-                                <td>{item?.name}</td>
-                                <td>
-                                    <div className="flex items-center gap-2">
-                                        <span
-                                            className="inline-block size-4 rounded-full border border-fd-border"
-                                            style={{
-                                                background: value,
-                                            }}
-                                        ></span>
-                                        <span>{value}</span>
-                                    </div>
-                                </td>
-                            </tr>
+                            <TokenRow
+                                key={`${category}-${item?.name}`}
+                                category={category}
+                                item={item}
+                            />
                         );
-                    })}
+                    }),
+                )}
             </tbody>
         </table>
     );

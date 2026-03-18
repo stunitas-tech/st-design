@@ -1,7 +1,16 @@
 {
   "resources": [
     {
-      "path": "/colors.json"
+      "path": "/palette.json",
+      "name": "palette"
+    },
+    {
+      "path": "/semantic.json",
+      "name": "semantic"
+    },
+    {
+      "path": "/dimension.json",
+      "name": "dimension"
     }
   ]
 }

@@ -1,0 +1,188 @@
+[
+  {
+    "name": "bg/neutral/default",
+    "type": "Color",
+    "value": "#FFFFFF (100%)",
+    "alias": "Palette/Neutral/Neutral0"
+  },
+  {
+    "name": "bg/neutral/weak",
+    "type": "Color",
+    "value": "#F6F6F9 (100%)",
+    "alias": "Palette/Neutral/Neutral10"
+  },
+  {
+    "name": "bg/neutral/subtle",
+    "type": "Color",
+    "value": "#EDEDF3 (100%)",
+    "alias": "Palette/Neutral/Neutral20"
+  },
+  {
+    "name": "bg/neutral/tint",
+    "type": "Color",
+    "value": "#FAFAFC (100%)",
+    "alias": "Palette/Neutral/Neutral5"
+  },
+  {
+    "name": "bg/neutral/contrast",
+    "type": "Color",
+    "value": "#5C6675 (100%)",
+    "alias": "Palette/Neutral/Neutral70"
+  },
+  {
+    "name": "bg/neutral/inverted",
+    "type": "Color",
+    "value": "#121212 (100%)",
+    "alias": "Palette/Neutral/Neutral100"
+  },
+  {
+    "name": "bg/overlay/backdrop",
+    "type": "Color",
+    "value": "#000000 (40%)",
+    "alias": "Palette/Alpha/Alpha40"
+  },
+  {
+    "name": "bg/overlay/cover",
+    "type": "Color",
+    "value": "#000000 (70%)",
+    "alias": "Palette/Alpha/Alpha70"
+  },
+  {
+    "name": "bg/neutral/mute",
+    "type": "Color",
+    "value": "#C2CAD6 (100%)",
+    "alias": "Palette/Neutral/Neutral40"
+  },
+  {
+    "name": "text/default",
+    "type": "Color",
+    "value": "#121212 (100%)",
+    "alias": "Palette/Neutral/Neutral100"
+  },
+  {
+    "name": "text/subtle",
+    "type": "Color",
+    "value": "#5C6675 (100%)",
+    "alias": "Palette/Neutral/Neutral70"
+  },
+  {
+    "name": "text/inverted",
+    "type": "Color",
+    "value": "#FFFFFF (100%)",
+    "alias": "Palette/Neutral/Neutral0"
+  },
+  {
+    "name": "text/mute",
+    "type": "Color",
+    "value": "#C2CAD6 (100%)",
+    "alias": "Palette/Neutral/Neutral40"
+  },
+  {
+    "name": "stroke/default",
+    "type": "Color",
+    "value": "#EDEDF3 (100%)",
+    "alias": "Palette/Neutral/Neutral20"
+  },
+  {
+    "name": "stroke/subtle",
+    "type": "Color",
+    "value": "#F6F6F9 (100%)",
+    "alias": "Palette/Neutral/Neutral10"
+  },
+  {
+    "name": "stroke/accent",
+    "type": "Color",
+    "value": "#5C6675 (100%)",
+    "alias": "Palette/Neutral/Neutral70"
+  },
+  {
+    "name": "icon/default",
+    "type": "Color",
+    "value": "#5C6675 (100%)",
+    "alias": "Palette/Neutral/Neutral70"
+  },
+  {
+    "name": "support/positive",
+    "type": "Color",
+    "value": "#2773F7 (100%)",
+    "alias": "Palette/Blue/Blue60"
+  },
+  {
+    "name": "brand/\bprimary-default",
+    "type": "Color",
+    "value": "#025AF6 (100%)",
+    "alias": "Palette/Blue/Blue70"
+  },
+  {
+    "name": "brand/primary-subtle",
+    "type": "Color",
+    "value": "#CCDEFF (100%)",
+    "alias": "Palette/Blue/Blue20"
+  },
+  {
+    "name": "brand/primary-weak",
+    "type": "Color",
+    "value": "#E7EFFD (100%)",
+    "alias": "Palette/Blue/Blue10"
+  },
+  {
+    "name": "support/positive-subtle",
+    "type": "Color",
+    "value": "#E7EFFD (100%)",
+    "alias": "Palette/Blue/Blue10"
+  },
+  {
+    "name": "support/critical",
+    "type": "Color",
+    "value": "#E81A17 (100%)",
+    "alias": "Palette/Red/Red60"
+  },
+  {
+    "name": "support/critical-subtle",
+    "type": "Color",
+    "value": "#FDE7E7 (100%)",
+    "alias": "Palette/Red/Red10"
+  },
+  {
+    "name": "support/adaptive",
+    "type": "Color",
+    "value": "#C84EF4 (100%)",
+    "alias": "Palette/Purple/Purple50"
+  },
+  {
+    "name": "support/adaptive-subtle",
+    "type": "Color",
+    "value": "#F8E6FE (100%)",
+    "alias": "Palette/Purple/Purple10"
+  },
+  {
+    "name": "support/netural",
+    "type": "Color",
+    "value": "#7B8A9D (100%)",
+    "alias": "Palette/Neutral/Neutral60"
+  },
+  {
+    "name": "support/netural-subtle",
+    "type": "Color",
+    "value": "#EDEDF3 (100%)",
+    "alias": "Palette/Neutral/Neutral20"
+  },
+  {
+    "name": "icon/subtle",
+    "type": "Color",
+    "value": "#121212 (100%)",
+    "alias": "Palette/Neutral/Neutral100"
+  },
+  {
+    "name": "icon/inverted",
+    "type": "Color",
+    "value": "#FFFFFF (100%)",
+    "alias": "Palette/Neutral/Neutral0"
+  },
+  {
+    "name": "icon/mute",
+    "type": "Color",
+    "value": "#C2CAD6 (100%)",
+    "alias": "Palette/Neutral/Neutral40"
+  }
+]

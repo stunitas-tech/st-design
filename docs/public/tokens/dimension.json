@@ -1,0 +1,303 @@
+[
+  {
+    "name": "gap/2",
+    "type": "Number",
+    "value": "2",
+    "alias": "Dimension/base/x0_5"
+  },
+  {
+    "name": "gap/4",
+    "type": "Number",
+    "value": "4",
+    "alias": "Dimension/base/x1"
+  },
+  {
+    "name": "gap/6",
+    "type": "Number",
+    "value": "6",
+    "alias": "Dimension/base/x1_5"
+  },
+  {
+    "name": "gap/8",
+    "type": "Number",
+    "value": "8",
+    "alias": "Dimension/base/x2"
+  },
+  {
+    "name": "gap/12",
+    "type": "Number",
+    "value": "12",
+    "alias": "Dimension/base/x3"
+  },
+  {
+    "name": "gap/16",
+    "type": "Number",
+    "value": "16",
+    "alias": "Dimension/base/x4"
+  },
+  {
+    "name": "gap/20",
+    "type": "Number",
+    "value": "20",
+    "alias": "Dimension/base/x5"
+  },
+  {
+    "name": "gap/24",
+    "type": "Number",
+    "value": "24",
+    "alias": "Dimension/base/x6"
+  },
+  {
+    "name": "gap/30",
+    "type": "Number",
+    "value": "30",
+    "alias": "Dimension/base/x7_5"
+  },
+  {
+    "name": "gap/40",
+    "type": "Number",
+    "value": "40",
+    "alias": "Dimension/base/x10"
+  },
+  {
+    "name": "gap/50",
+    "type": "Number",
+    "value": "50",
+    "alias": "Dimension/base/x12_5"
+  },
+  {
+    "name": "padding/2",
+    "type": "Number",
+    "value": "2",
+    "alias": "Dimension/base/x0_5"
+  },
+  {
+    "name": "padding/4",
+    "type": "Number",
+    "value": "4",
+    "alias": "Dimension/base/x1"
+  },
+  {
+    "name": "padding/6",
+    "type": "Number",
+    "value": "6",
+    "alias": "Dimension/base/x1_5"
+  },
+  {
+    "name": "padding/8",
+    "type": "Number",
+    "value": "8",
+    "alias": "Dimension/base/x2"
+  },
+  {
+    "name": "padding/12",
+    "type": "Number",
+    "value": "12",
+    "alias": "Dimension/base/x3"
+  },
+  {
+    "name": "padding/16",
+    "type": "Number",
+    "value": "16",
+    "alias": "Dimension/base/x4"
+  },
+  {
+    "name": "padding/20",
+    "type": "Number",
+    "value": "20",
+    "alias": "Dimension/base/x5"
+  },
+  {
+    "name": "padding/24",
+    "type": "Number",
+    "value": "24",
+    "alias": "Dimension/base/x6"
+  },
+  {
+    "name": "padding/30",
+    "type": "Number",
+    "value": "30",
+    "alias": "Dimension/base/x7_5"
+  },
+  {
+    "name": "padding/40",
+    "type": "Number",
+    "value": "40",
+    "alias": "Dimension/base/x10"
+  },
+  {
+    "name": "padding/50",
+    "type": "Number",
+    "value": "50",
+    "alias": "Dimension/base/x12_5"
+  },
+  {
+    "name": "padding/80",
+    "type": "Number",
+    "value": "80",
+    "alias": "Dimension/base/x20"
+  },
+  {
+    "name": "radius/2",
+    "type": "Number",
+    "value": "2",
+    "alias": "Dimension/base/x0_5"
+  },
+  {
+    "name": "radius/4",
+    "type": "Number",
+    "value": "4",
+    "alias": "Dimension/base/x1"
+  },
+  {
+    "name": "radius/6",
+    "type": "Number",
+    "value": "6",
+    "alias": "Dimension/base/x1_5"
+  },
+  {
+    "name": "radius/8",
+    "type": "Number",
+    "value": "8",
+    "alias": "Dimension/base/x2"
+  },
+  {
+    "name": "radius/12",
+    "type": "Number",
+    "value": "12",
+    "alias": "Dimension/base/x3"
+  },
+  {
+    "name": "radius/16",
+    "type": "Number",
+    "value": "16",
+    "alias": "Dimension/base/x4"
+  },
+  {
+    "name": "radius/20",
+    "type": "Number",
+    "value": "20",
+    "alias": "Dimension/base/x5"
+  },
+  {
+    "name": "radius/24",
+    "type": "Number",
+    "value": "24",
+    "alias": "Dimension/base/x6"
+  },
+  {
+    "name": "radius/max",
+    "type": "Number",
+    "value": "999"
+  },
+  {
+    "name": "base/x0_5",
+    "type": "Number",
+    "value": "2"
+  },
+  {
+    "name": "base/x1",
+    "type": "Number",
+    "value": "4"
+  },
+  {
+    "name": "base/x1_5",
+    "type": "Number",
+    "value": "6"
+  },
+  {
+    "name": "base/x2",
+    "type": "Number",
+    "value": "8"
+  },
+  {
+    "name": "base/x2_5",
+    "type": "Number",
+    "value": "10"
+  },
+  {
+    "name": "base/x3",
+    "type": "Number",
+    "value": "12"
+  },
+  {
+    "name": "base/x3_5",
+    "type": "Number",
+    "value": "14"
+  },
+  {
+    "name": "base/x4",
+    "type": "Number",
+    "value": "16"
+  },
+  {
+    "name": "base/x4_5",
+    "type": "Number",
+    "value": "18"
+  },
+  {
+    "name": "base/x5",
+    "type": "Number",
+    "value": "20"
+  },
+  {
+    "name": "base/x6",
+    "type": "Number",
+    "value": "24"
+  },
+  {
+    "name": "base/x7",
+    "type": "Number",
+    "value": "28"
+  },
+  {
+    "name": "base/x7_5",
+    "type": "Number",
+    "value": "30"
+  },
+  {
+    "name": "base/x8",
+    "type": "Number",
+    "value": "32"
+  },
+  {
+    "name": "base/x9",
+    "type": "Number",
+    "value": "36"
+  },
+  {
+    "name": "base/x10",
+    "type": "Number",
+    "value": "40"
+  },
+  {
+    "name": "base/x12",
+    "type": "Number",
+    "value": "48"
+  },
+  {
+    "name": "base/x12_5",
+    "type": "Number",
+    "value": "50"
+  },
+  {
+    "name": "base/x13",
+    "type": "Number",
+    "value": "52"
+  },
+  {
+    "name": "base/x14",
+    "type": "Number",
+    "value": "56"
+  },
+  {
+    "name": "base/x16",
+    "type": "Number",
+    "value": "64"
+  },
+  {
+    "name": "base/x20",
+    "type": "Number",
+    "value": "80"
+  }
+]

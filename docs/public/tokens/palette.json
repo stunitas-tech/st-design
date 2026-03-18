@@ -32,7 +32,7 @@
   {
     "name": "Neutral/Neutral50",
     "type": "Color",
-    "value": "#A3B1C2 (100%)"
+    "value": "#A4B1C1 (100%)"
   },
   {
     "name": "Neutral/Neutral60",
@@ -139,7 +139,6 @@
     "type": "Color",
     "value": "#B29077 (100%)"
   },
-
   {
     "name": "Red/Red70",
     "type": "Color",
@@ -261,21 +260,6 @@
     "value": "#A170B2 (100%)"
   },
   {
-    "name": "Blue/Blue100",
-    "type": "Color",
-    "value": "#001542 (100%)"
-  },
-  {
-    "name": "Blue/Blue90",
-    "type": "Color",
-    "value": "#002D7A (100%)"
-  },
-  {
-    "name": "Blue/Blue80",
-    "type": "Color",
-    "value": "#0141B1 (100%)"
-  },
-  {
     "name": "Blue/Blue70",
     "type": "Color",
     "value": "#025AF6 (100%)"
@@ -303,7 +287,7 @@
   {
     "name": "Blue/Blue20",
     "type": "Color",
-    "value": "#C2D8FF (100%)"
+    "value": "#CCDEFF (100%)"
   },
   {
     "name": "Blue/Blue10",
@@ -314,6 +298,21 @@
     "name": "Blue/Blue60-low",
     "type": "Color",
     "value": "#778DB2 (100%)"
+  },
+  {
+    "name": "Skyblue/Skyblue100",
+    "type": "Color",
+    "value": "#01262D (100%)"
+  },
+  {
+    "name": "Skyblue/Skyblue90",
+    "type": "Color",
+    "value": "#013F4C (100%)"
+  },
+  {
+    "name": "Skyblue/Skyblue80",
+    "type": "Color",
+    "value": "#015D6F (100%)"
   },
   {
     "name": "Skyblue/Skyblue70",
@@ -444,5 +443,40 @@
     "name": "Alpha/Alpha90",
     "type": "Color",
     "value": "#000000 (90%)"
+  },
+  {
+    "name": "Opacity/0",
+    "type": "Number",
+    "value": "0"
+  },
+  {
+    "name": "Opacity/2",
+    "type": "Number",
+    "value": "2"
+  },
+  {
+    "name": "Opacity/4",
+    "type": "Number",
+    "value": "4"
+  },
+  {
+    "name": "Opacity/8",
+    "type": "Number",
+    "value": "8"
+  },
+  {
+    "name": "Opacity/40",
+    "type": "Number",
+    "value": "40"
+  },
+  {
+    "name": "Opacity/70",
+    "type": "Number",
+    "value": "70"
+  },
+  {
+    "name": "Opacity/80",
+    "type": "Number",
+    "value": "80"
   }
 ]

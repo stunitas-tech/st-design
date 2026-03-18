@@ -23,7 +23,7 @@ function writeTokens(name: string, data: unknown) {
 
 function writeIndex(files: string[]) {
     const index = {
-        resources: files.map((f) => ({ path: `/${f}.json` })),
+        resources: files.map((f) => ({ path: `/${f}.json`, name: f })),
     };
 
     fs.writeFileSync(
@@ -32,29 +32,68 @@ function writeIndex(files: string[]) {
     );
 }
 
-// 텍스트 검색
-function findText(node: NodeWithChildren): string | undefined {
+// 텍스트 검색 (별칭 패턴 대응)
+function findText(
+    node: NodeWithChildren,
+    pattern: string = "#",
+): string | undefined {
     const texts: string[] = [];
 
     function walk(n: NodeWithChildren) {
         if (n.type === "TEXT" && typeof n.characters === "string") {
             texts.push(n.characters.trim());
         }
-
         for (const child of n.children ?? []) {
             walk(child);
         }
     }
 
-    // ColorTemplate부터 내려가며 TEXT 수집
     walk(node);
 
-    // 1️⃣ '#'으로 시작하는 텍스트 우선
-    const colorText = texts.find((t) => t.startsWith("#"));
-    if (colorText) return colorText;
+    // 패턴(예: '#', '@')이 있으면 해당 텍스트 우선 반환
+    if (pattern) {
+        const matched = texts.find((t) => t.startsWith(pattern));
+        if (matched) return matched;
+    }
 
-    // 2️⃣ 없으면 첫 번째 텍스트
-    return texts[0];
+    return texts[0]; // 없으면 첫 번째 텍스트
+}
+
+function findAlias(node: NodeWithChildren): string | undefined {
+    function walk(n: NodeWithChildren): string | undefined {
+        if (!n.children) return;
+
+        for (let i = 0; i < n.children.length; i++) {
+            const child = n.children[i];
+
+            if (
+                child.type === "TEXT" &&
+                child.characters?.trim() === "Alias:"
+            ) {
+                const next = n.children[i + 1];
+
+                let value: string | undefined;
+
+                if (next?.type === "TEXT") {
+                    value = next.characters.trim();
+                } else if (next) {
+                    value = findText(next);
+                }
+
+                // ✅ 여기 핵심 필터
+                if (!value || value === "Alias name") {
+                    return undefined;
+                }
+
+                return value;
+            }
+
+            const found = walk(child);
+            if (found !== undefined) return found;
+        }
+    }
+
+    return walk(node);
 }
 
 // Row 파싱
@@ -62,6 +101,7 @@ function parseRow(row: NodeWithChildren) {
     let name: string | undefined;
     let type: string | undefined;
     let value: string | undefined;
+    let alias: string | undefined;
 
     for (const cell of row.children ?? []) {
         if (cell.type !== "INSTANCE") continue;
@@ -76,12 +116,14 @@ function parseRow(row: NodeWithChildren) {
 
         if (cell.name.toLowerCase().includes("value")) {
             value = findText(cell);
+
+            alias = findAlias(cell) ?? undefined;
         }
     }
 
     if (!name && !type && !value) return null;
 
-    return { name, type, value };
+    return { name, type, value, alias };
 }
 
 // Row All
@@ -108,89 +150,84 @@ function rgbaToHex({ r, g, b }: RGBA) {
 }
 
 export async function figmaToToken() {
-    if (!FIGMA_TOKEN) {
-        console.warn(
-            "FIGMA_PERSONAL_ACCESS_TOKEN 환경변수가 설정되지 않았습니다. 스타일 추출을 건너뜁니다.",
-        );
+    if (!FIGMA_TOKEN || !FIGMA_FILE_KEY) {
+        console.warn("환경변수가 설정되지 않았습니다.");
         return [];
     }
 
-    if (!FIGMA_FILE_KEY) {
-        console.warn(
-            "FIGMA_FILE_KEY 환경변수가 설정되지 않았습니다. 스타일 추출을 건너뜁니다.",
-        );
-        return [];
-    }
-
-    const api = new FigmaApi({
-        personalAccessToken: FIGMA_TOKEN,
-    });
+    const api = new FigmaApi({ personalAccessToken: FIGMA_TOKEN });
 
     try {
         const file = await api.getFile({ file_key: FIGMA_FILE_KEY });
 
-        // const tokenPage = file.document.children.find(
-        //     (node: Node) => node.type === "CANVAS" && node.name === "Token"
-        // );
-
+        // 1️⃣ 'Variables Documentation' 프레임 찾기
         const variablesFrame = file.document.children
-            .flatMap((page: Node) =>
+            .flatMap((page: any) =>
                 page.type === "CANVAS" ? (page.children ?? []) : [],
             )
             .find(
-                (node: Node) =>
+                (node: any) =>
                     node.type === "FRAME" &&
                     node.name === "Variables Documentation",
             ) as CanvasWithChildren;
 
-        // const palette = variablesFrame?.children?.[0] as NodeWithChildren;
-        const collectionPalette = variablesFrame.children?.find(
-            (n) => n.type === "FRAME" && n.name === "Collection Palette",
-        ) as NodeWithChildren;
+        if (!variablesFrame || !variablesFrame.children) {
+            console.warn(
+                "'Variables Documentation' 프레임을 찾을 수 없습니다.",
+            );
+            return [];
+        }
 
-        const rows = extractPaletteRows(collectionPalette);
+        // 2️⃣ 추출할 대상 정의 (프레임 이름 : 저장할 파일 이름)
+        const targetCollections = [
+            { frameName: "Collection Palette", fileName: "palette" },
+            { frameName: "Collection Semantic Color", fileName: "semantic" },
+            { frameName: "Collection Dimension", fileName: "dimension" },
+        ];
 
-        // console.log(rows);
-        writeTokens("colors", rows);
-        writeIndex(["colors"]);
-        console.log(rows);
-        console.log("--- 완료 ---");
-        return rows;
+        const savedFiles: string[] = [];
+
+        // 3️⃣ 각 컬렉션을 순회하며 데이터 추출 및 저장
+        targetCollections.forEach(({ frameName, fileName }) => {
+            const collectionNode = variablesFrame.children?.find(
+                (n) => n.type === "FRAME" && n.name === frameName,
+            ) as NodeWithChildren;
+
+            if (collectionNode) {
+                const rows = extractPaletteRows(collectionNode);
+
+                // 4️⃣ 데이터가 성공적으로 존재할 때만 파일 저장
+                if (rows && rows.length > 0) {
+                    writeTokens(fileName, rows);
+                    savedFiles.push(fileName); // 인덱스에 추가할 파일 목록
+                    console.log(
+                        `✅ ${frameName} 추출 성공: ${fileName}.json 저장됨`,
+                    );
+                } else {
+                    console.warn(
+                        `⚠️ ${frameName}에 유효한 Row 데이터가 없습니다.`,
+                    );
+                }
+            } else {
+                console.warn(
+                    `❓ ${frameName} 프레임을 찾을 수 없어 건너뜁니다.`,
+                );
+            }
+        });
+
+        // 5️⃣ 성공한 파일들만 모아서 index.json 업데이트
+        if (savedFiles.length > 0) {
+            writeIndex(savedFiles);
+            console.log("--- 모든 작업 완료 ---");
+        } else {
+            console.log("--- 저장된 토큰 파일이 없습니다 ---");
+        }
+
+        return savedFiles;
     } catch (error) {
-        console.log(FIGMA_FILE_KEY);
         console.warn("Figma 파일를 가져오는데 실패했습니다:", error);
         return [];
     }
-    // try {
-    //     const {
-    //         meta: { variables },
-    //     } = await api.getLocalVariables({ file_key: FIGMA_FILE_KEY });
-    //     console.log(variables);
-    //     return Object.values(variables);
-    // } catch (error) {
-    //     console.warn("Figma 변수를 가져오는데 실패했습니다:", error);
-    //     return [];
-    // }
-
-    //   const colors: Record<string, string> = {};
-
-    //   Object.values(meta.variables).forEach((v: LocalVariable) => {
-    //     if (v.resolvedType !== "COLOR") return;
-
-    //     const value = Object.values(v.valuesByMode)[0] as RGBA;
-    //     if (!value) return;
-
-    //     colors[v.name.replace(/\//g, ".")] = rgbaToHex(value);
-    //   });
-
-    //   const outputPath = path.resolve("docs/public/tokens/colors.json");
-
-    //   await fs.mkdir(path.dirname(outputPath), { recursive: true });
-    //   await fs.writeFile(outputPath, JSON.stringify(colors, null, 2));
-
-    //   console.log(
-    //     `✅ colors.json generated (${Object.keys(colors).length} tokens)`
-    //   );
 }
 
 figmaToToken();
