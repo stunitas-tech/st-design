@@ -1,0 +1,174 @@
+---
+title: Bottom CTA
+description: 화면 하단에 위치하여 사용자의 주요 행동(Call To Action)을 유도하는 영역 컴포넌트입니다.
+---
+
+## Anatomy
+
+![Anatomy img](/images/docs/component/bottom cta/img1.png)
+
+Container: 버튼 요소들을 감싸는 최상위 영역입니다. 화면 하단에 고정되며 스크롤 시에도 항상 노출됩니다.
+Primary Button: 사용자가 수행해야 할 가장 핵심적인 액션 버튼입니다.
+Assist-Button: 취소, 뒤로 가기 등 보조적인 역할을 수행하는 선택적 버튼 영역입니다.
+Icon-Button: 장바구니,
+Background / Overlay: 본문 콘텐츠와 CTA 영역을 시각적으로 구분하기 위한 배경 및 그림자 영역입니다.
+
+## Properties
+
+### Size
+
+![Size img](/images/docs/(docs)/bottom cta/img2.png)
+
+Bottom CTA 영역의 전체 높이와 내부 여백(Padding)을 결정하는 크기 속성입니다. 화면의 크기나 뷰포트 환경에 따라 적합한 CSS 클래스를 적용하여 조절합니다.
+
+### Width(min,max)
+
+![Width img](/images/docs/(docs)/bottom cta/img3.png)
+
+일반적으로 모바일에서는 화면 전체 너비를 차지하지만, 특정 해상도 이상에서는 최대 너비(Max-width) 제한이 적용될 수 있습니다.
+
+### Layout
+
+![Layout img](/images/docs/(docs)/bottom cta/img4.png)
+
+Bottom CTA 내부에 배치되는 버튼의 개수와 배열 방식에 따라 레이아웃이 구분됩니다. 주로 단일 버튼 또는 복수(Primary + Secondary) 버튼 레이아웃을 사용합니다.
+
+### Type
+
+![Type img](/images/docs/(docs)/bottom cta/img5.png)
+
+시각적 형태와 화면 렌더링 방식의 차이를 나타냅니다. 화면 하단 고정으로 여백 없이 꽉 차는 기본형(Default)과, 양옆과 상하단에 여백을 두는 modal 하단에 고정되는 플로팅(Floating)형이 있습니다.
+
+### State
+
+![State img](/images/docs/(docs)/bottom cta/img6.png)
+
+버튼 요소의 상호작용 상태를 의미합니다. 기본(Default), 마우스 오버(Hover), 눌림(Active), 비활성화(Disabled) 상태로 구분됩니다.
+
+## Guidelines
+
+### Hierarchy
+
+![Hierarchy img](/images/docs/(docs)/bottom cta/img7.png)
+
+Bottom CTA 내부에 두 개 이상의 액션 요소가 존재할 경우, 중요도에 따라 시각적 계층 구조를 명확하게 분리해야 합니다.
+
+| 버튼 유형 | 시각적 강조                   | CSS 클래스 예시   | 역할 및 목적                                                            |
+| --------- | ----------------------------- | ----------------- | ----------------------------------------------------------------------- |
+| Primary   | 높음 (Solid Color)            | `.botton-primary` | 화면의 핵심 행동 유도 (예: 확인, 결제)                                  |
+| Assist    | 중간 ~ 낮음 (Outline / Ghost) | `.button-assist`  | Primary를 보조하는 선택적 행동 제공 (예: 취소, 이전, 옵션 변경)         |
+| Icon      | 낮음 (Outline/Ghost)          | `.botton-icon`    | 콘텐츠에 대한 부가 액션을 빠르게 수행 (예: 장바구니 추가, 좋아요, 공유) |
+
+### Usage
+
+#### 고정형 하단 버튼 사용 (Fixed Bottom CTA)
+
+![Usage Guideline img](/images/docs/(docs)/bottom cta/img1.png)
+
+사용자가 긴 콘텐츠를 스크롤하더라도 언제든지 핵심 액션을 실행할 수 있도록 보장해야 할 때 사용합니다. 컨테이너에 `position: fixed` 속성을 적용하여 접근성을 극대화합니다.
+
+| Type                | Description                                                                   |
+| ------------------- | ----------------------------------------------------------------------------- |
+| Full Width (기본형) | 화면의 양쪽 끝과 하단에 여백 없이 밀착되어 안정감을 주는 구조입니다.          |
+| Floating (플로팅형) | 여백을 활용하여 배경 콘텐츠와 시각적으로 분리시켜 주목도를 높이는 구조입니다. |
+
+### Bottom CTA 버튼 조합 규칙
+
+#### 1. Primary 버튼
+
+- 가장 중요한 핵심 행동을 담당
+- 반드시 1개만 사용
+
+**규칙**
+
+- 한 영역 내 Primary는 최대 1개
+- CTA 내 시각적 중심에 배치
+
+#### 2. Assist 버튼
+
+- Primary를 보조하는 선택적 행동 제공
+
+**규칙**
+
+- Primary와 함께 사용
+- 최대 1~2개까지 허용
+- Primary보다 낮은 시각적 강조 유지
+
+#### 3. Icon 버튼
+
+- 장바구니, 좋아요 등 빠른 부가 액션 제공
+
+**규칙**
+
+- Primary / Assist와 역할적으로 분리
+- CTA 흐름을 방해하지 않는 위치에 배치
+- 단독 CTA로 사용하지 않음
+
+#### 4. 레이아웃 구조
+
+사용자의 시선 흐름과 행동 우선순위를 고려해 배치한다.
+
+**기본 구조**
+`Icon` `Assist` `Primary`
+
+- 좌측: 부가 액션 (Icon)
+- 우측: 주요 액션 (Assist → Primary)
+
+#### 5. 버튼 개수 가이드
+
+- 최소: Primary 1개
+- 기본: Primary + Assist
+- 확장: Icon + Primary (+ Assist 1)
+
+버튼 수가 많아질수록 선택 비용이 증가하므로 제한적으로 사용한다.
+
+#### 6. 금지 규칙
+
+- Primary 버튼 2개 이상 사용 금지
+- Icon 버튼만 단독 사용 금지
+- Assist가 Primary보다 강조되는 구성 금지
+- 4개 이상의 버튼 나열 금지
+
+#### 7. 패턴 예시
+
+핵심 원칙은 사용자가 어떤 행동을 해야 하는지 고민하지 않도록 명확한 우선순위를 제공한다.
+
+| 패턴           | 구성                      |
+| -------------- | ------------------------- |
+| 단일 행동      | `Primary`                 |
+| 선택 행동      | `Assist` `Primary`        |
+| 부가 액션 포함 | `Icon` `Primary`          |
+| 확장형         | `Icon` `Assist` `Primary` |
+
+## Specification
+
+### base
+
+| 상태    | 슬롯      | 속성       | 값      |
+| ------- | --------- | ---------- | ------- |
+| Default | Container | `position` | `fixed` |
+| Default | Container | `bottom`   | `0`     |
+| Default | Container | `width`    | `100%`  |
+| Default | Container | `z-index`  | `100`   |
+
+### Variant
+
+- 형태 및 레이아웃 변형에 따른 CSS 속성 명세입니다.
+
+| 상태     | 슬롯      | 속성            | 값                  |
+| -------- | --------- | --------------- | ------------------- |
+| Floating | Container | `bottom`        | `16px`              |
+| Floating | Container | `margin`        | `0 16px`            |
+| Floating | Container | `border-radius` | `16px`              |
+| Floating | Container | `width`         | `calc(100% - 32px)` |
+
+### Size
+
+- 다양한 화면 크기에 대응하기 위한 컴포넌트 여백 및 높이 명세입니다.
+
+| 상태   | 슬롯      | 속성         | 값          |
+| ------ | --------- | ------------ | ----------- |
+| Large  | Container | `padding`    | `16px 20px` |
+| Large  | Container | `min-height` | `72px`      |
+| Medium | Container | `padding`    | `12px 16px` |
+| Medium | Container | `min-height` | `64px`      |
