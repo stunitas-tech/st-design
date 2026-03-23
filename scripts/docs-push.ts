@@ -129,15 +129,28 @@ function docsPush(): void {
             return;
         }
 
-        // 5. 커밋 및 푸시
         execSync(
-            `git commit -m "design: sync figma tokens (${timestamp}) [skip ci]"`,
-            {
-                stdio: "inherit",
-            },
+            `git commit -m "🎨 Design: Document Update (${timestamp}) [skip ci] [vercel skip deployment]"`,
+            { stdio: "inherit" },
         );
-        console.log("🚀 GitHub으로 전송 중...");
-        execSync(`git push origin ${branchName}`, { stdio: "inherit" });
+
+        // 6. Pull Request 생성 (GitHub CLI 'gh' 설치 필요)
+        try {
+            console.log("📝 Pull Request 생성 중...");
+            // --fill 옵션은 커밋 메시지를 제목과 내용으로 자동 사용합니다.
+            execSync(
+                `gh pr create --base ${defaultBranch} --head ${branchName} --title "🎨 Design: Document Update (${timestamp})" --body "업데이트된 디자인 문서를 반영합니다."`,
+                {
+                    stdio: "inherit",
+                },
+            );
+            console.log("✅ PR이 성공적으로 생성되었습니다.");
+        } catch (e) {
+            console.log(
+                "⚠️ PR 생성 실패 (이미 존재하거나 gh CLI가 설정되지 않았을 수 있습니다.)",
+            );
+            // PR 생성이 실패해도 프로세스는 계속 진행되게 처리
+        }
 
         // 7. 다시 메인 브랜치로 복귀하여 최신화
         console.log(

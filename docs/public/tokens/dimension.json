@@ -1,189 +1,135 @@
 [
   {
-    "name": "gap/2",
+    "name": "spacing/02",
     "type": "Number",
     "value": "2",
-    "alias": "Dimension/base/x0_5"
+    "alias": "dimension/base/x0_5"
   },
   {
-    "name": "gap/4",
+    "name": "spacing/04",
     "type": "Number",
     "value": "4",
-    "alias": "Dimension/base/x1"
+    "alias": "dimension/base/x1"
   },
   {
-    "name": "gap/6",
+    "name": "spacing/06",
     "type": "Number",
     "value": "6",
-    "alias": "Dimension/base/x1_5"
+    "alias": "dimension/base/x1_5"
   },
   {
-    "name": "gap/8",
+    "name": "spacing/08",
     "type": "Number",
     "value": "8",
-    "alias": "Dimension/base/x2"
+    "alias": "dimension/base/x2"
   },
   {
-    "name": "gap/12",
+    "name": "spacing/10",
+    "type": "Number",
+    "value": "10",
+    "alias": "dimension/base/x2_5"
+  },
+  {
+    "name": "spacing/12",
     "type": "Number",
     "value": "12",
-    "alias": "Dimension/base/x3"
+    "alias": "dimension/base/x3"
   },
   {
-    "name": "gap/16",
+    "name": "spacing/16",
     "type": "Number",
     "value": "16",
-    "alias": "Dimension/base/x4"
+    "alias": "dimension/base/x4"
   },
   {
-    "name": "gap/20",
+    "name": "spacing/20",
     "type": "Number",
     "value": "20",
-    "alias": "Dimension/base/x5"
+    "alias": "dimension/base/x5"
   },
   {
-    "name": "gap/24",
+    "name": "spacing/24",
     "type": "Number",
     "value": "24",
-    "alias": "Dimension/base/x6"
+    "alias": "dimension/base/x6"
   },
   {
-    "name": "gap/30",
+    "name": "spacing/30",
     "type": "Number",
     "value": "30",
-    "alias": "Dimension/base/x7_5"
+    "alias": "dimension/base/x7_5"
   },
   {
-    "name": "gap/40",
+    "name": "spacing/40",
     "type": "Number",
     "value": "40",
-    "alias": "Dimension/base/x10"
+    "alias": "dimension/base/x10"
   },
   {
-    "name": "gap/50",
+    "name": "spacing/50",
     "type": "Number",
     "value": "50",
-    "alias": "Dimension/base/x12_5"
+    "alias": "dimension/base/x12_5"
   },
   {
-    "name": "padding/2",
-    "type": "Number",
-    "value": "2",
-    "alias": "Dimension/base/x0_5"
-  },
-  {
-    "name": "padding/4",
-    "type": "Number",
-    "value": "4",
-    "alias": "Dimension/base/x1"
-  },
-  {
-    "name": "padding/6",
-    "type": "Number",
-    "value": "6",
-    "alias": "Dimension/base/x1_5"
-  },
-  {
-    "name": "padding/8",
-    "type": "Number",
-    "value": "8",
-    "alias": "Dimension/base/x2"
-  },
-  {
-    "name": "padding/12",
-    "type": "Number",
-    "value": "12",
-    "alias": "Dimension/base/x3"
-  },
-  {
-    "name": "padding/16",
-    "type": "Number",
-    "value": "16",
-    "alias": "Dimension/base/x4"
-  },
-  {
-    "name": "padding/20",
-    "type": "Number",
-    "value": "20",
-    "alias": "Dimension/base/x5"
-  },
-  {
-    "name": "padding/24",
-    "type": "Number",
-    "value": "24",
-    "alias": "Dimension/base/x6"
-  },
-  {
-    "name": "padding/30",
-    "type": "Number",
-    "value": "30",
-    "alias": "Dimension/base/x7_5"
-  },
-  {
-    "name": "padding/40",
-    "type": "Number",
-    "value": "40",
-    "alias": "Dimension/base/x10"
-  },
-  {
-    "name": "padding/50",
-    "type": "Number",
-    "value": "50",
-    "alias": "Dimension/base/x12_5"
-  },
-  {
-    "name": "padding/80",
+    "name": "spacing/80",
     "type": "Number",
     "value": "80",
-    "alias": "Dimension/base/x20"
+    "alias": "dimension/base/x20"
   },
   {
-    "name": "radius/2",
+    "name": "radius/02",
     "type": "Number",
     "value": "2",
-    "alias": "Dimension/base/x0_5"
+    "alias": "dimension/base/x0_5"
   },
   {
-    "name": "radius/4",
+    "name": "radius/04",
     "type": "Number",
     "value": "4",
-    "alias": "Dimension/base/x1"
+    "alias": "dimension/base/x1"
   },
   {
-    "name": "radius/6",
+    "name": "radius/06",
     "type": "Number",
     "value": "6",
-    "alias": "Dimension/base/x1_5"
+    "alias": "dimension/base/x1_5"
   },
   {
-    "name": "radius/8",
+    "name": "radius/08",
     "type": "Number",
     "value": "8",
-    "alias": "Dimension/base/x2"
+    "alias": "dimension/base/x2"
+  },
+  {
+    "name": "radius/10",
+    "type": "Number",
+    "value": "10",
+    "alias": "dimension/base/x2_5"
   },
   {
     "name": "radius/12",
     "type": "Number",
     "value": "12",
-    "alias": "Dimension/base/x3"
+    "alias": "dimension/base/x3"
   },
   {
     "name": "radius/16",
     "type": "Number",
     "value": "16",
-    "alias": "Dimension/base/x4"
+    "alias": "dimension/base/x4"
   },
   {
     "name": "radius/20",
     "type": "Number",
     "value": "20",
-    "alias": "Dimension/base/x5"
+    "alias": "dimension/base/x5"
   },
   {
     "name": "radius/24",
     "type": "Number",
     "value": "24",
-    "alias": "Dimension/base/x6"
+    "alias": "dimension/base/x6"
   },
   {
     "name": "radius/max",
@@ -299,5 +245,10 @@
     "name": "base/x20",
     "type": "Number",
     "value": "80"
+  },
+  {
+    "name": "base/x25",
+    "type": "Number",
+    "value": "100"
   }
 ]

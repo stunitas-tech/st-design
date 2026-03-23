@@ -36,13 +36,17 @@ export default function TokenRow({
                     aria-expanded={isExpanded}
                 >
                     <div className="flex flex-col gap-1">
-                        <TokenValue item={item} />
+                        <TokenValue item={item} category={category} />
                         {isAlias && isExpanded && (
                             <>
                                 <div className="flex size-5 items-center justify-center">
                                     <MoveDown className="size-3" />
                                 </div>
-                                <TokenValue item={item} alias />
+                                <TokenValue
+                                    item={item}
+                                    category={category}
+                                    alias
+                                />
                             </>
                         )}
                     </div>

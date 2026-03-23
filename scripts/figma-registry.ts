@@ -149,18 +149,60 @@ function rgbaToHex({ r, g, b }: RGBA) {
     return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
 }
 
+const TEMP_TOKENS_DIR = path.join(process.cwd(), "docs/public/tokens_tmp");
+
+/**
+ * 임시 디렉토리 및 기존 파일 교체 로직
+ */
+async function finalizeTokens(savedFiles: string[]) {
+    try {
+        // 1. 기존 tokens 폴더에서 index.json을 제외한 파일 삭제
+        const files = fs.readdirSync(TOKENS_DIR);
+        for (const file of files) {
+            if (file !== "index.json") {
+                fs.unlinkSync(path.join(TOKENS_DIR, file));
+            }
+        }
+
+        // 2. 임시 폴더의 파일들을 실제 폴더로 이동
+        const tempFiles = fs.readdirSync(TEMP_TOKENS_DIR);
+        for (const file of tempFiles) {
+            fs.renameSync(
+                path.join(TEMP_TOKENS_DIR, file),
+                path.join(TOKENS_DIR, file),
+            );
+        }
+
+        // 3. index.json 업데이트
+        writeIndex(savedFiles);
+
+        // 4. 임시 폴더 삭제
+        fs.rmSync(TEMP_TOKENS_DIR, { recursive: true, force: true });
+
+        console.log("✨ 안전하게 모든 토큰이 교체되었습니다.");
+    } catch (err) {
+        console.error("파일 교체 중 오류 발생:", err);
+    }
+}
+
 export async function figmaToToken() {
     if (!FIGMA_TOKEN || !FIGMA_FILE_KEY) {
         console.warn("환경변수가 설정되지 않았습니다.");
         return [];
     }
 
+    // 작업 시작 전 임시 폴더 생성 (깨끗한 상태로)
+    if (fs.existsSync(TEMP_TOKENS_DIR)) {
+        fs.rmSync(TEMP_TOKENS_DIR, { recursive: true, force: true });
+    }
+    fs.mkdirSync(TEMP_TOKENS_DIR, { recursive: true });
+
     const api = new FigmaApi({ personalAccessToken: FIGMA_TOKEN });
 
     try {
+        console.log("🚀 Figma에서 데이터를 가져오는 중...");
         const file = await api.getFile({ file_key: FIGMA_FILE_KEY });
 
-        // 1️⃣ 'Variables Documentation' 프레임 찾기
         const variablesFrame = file.document.children
             .flatMap((page: any) =>
                 page.type === "CANVAS" ? (page.children ?? []) : [],
@@ -172,60 +214,52 @@ export async function figmaToToken() {
             ) as CanvasWithChildren;
 
         if (!variablesFrame || !variablesFrame.children) {
-            console.warn(
+            throw new Error(
                 "'Variables Documentation' 프레임을 찾을 수 없습니다.",
             );
-            return [];
         }
-
-        // 2️⃣ 추출할 대상 정의 (프레임 이름 : 저장할 파일 이름)
-        const targetCollections = [
-            { frameName: "Collection Palette", fileName: "palette" },
-            { frameName: "Collection Semantic Color", fileName: "semantic" },
-            { frameName: "Collection Dimension", fileName: "dimension" },
-        ];
 
         const savedFiles: string[] = [];
 
-        // 3️⃣ 각 컬렉션을 순회하며 데이터 추출 및 저장
-        targetCollections.forEach(({ frameName, fileName }) => {
-            const collectionNode = variablesFrame.children?.find(
-                (n) => n.type === "FRAME" && n.name === frameName,
-            ) as NodeWithChildren;
+        variablesFrame.children.forEach((node) => {
+            if (node.type !== "FRAME") return;
 
-            if (collectionNode) {
-                const rows = extractPaletteRows(collectionNode);
+            const collectionNode = node as NodeWithChildren;
+            const rows = extractPaletteRows(collectionNode);
 
-                // 4️⃣ 데이터가 성공적으로 존재할 때만 파일 저장
-                if (rows && rows.length > 0) {
-                    writeTokens(fileName, rows);
-                    savedFiles.push(fileName); // 인덱스에 추가할 파일 목록
-                    console.log(
-                        `✅ ${frameName} 추출 성공: ${fileName}.json 저장됨`,
-                    );
-                } else {
-                    console.warn(
-                        `⚠️ ${frameName}에 유효한 Row 데이터가 없습니다.`,
-                    );
-                }
-            } else {
-                console.warn(
-                    `❓ ${frameName} 프레임을 찾을 수 없어 건너뜁니다.`,
+            if (rows && rows.length > 0) {
+                const fileName = node.name
+                    .trim()
+                    .toLowerCase()
+                    .replace(/\s+/g, "-");
+
+                // ✅ 실제 폴더가 아닌 임시 폴더에 먼저 씁니다.
+                fs.writeFileSync(
+                    path.join(TEMP_TOKENS_DIR, `${fileName}.json`),
+                    JSON.stringify(rows, null, 2),
                 );
+                savedFiles.push(fileName);
+                console.log(`📦 [임시 저장] ${fileName}.json`);
             }
         });
 
-        // 5️⃣ 성공한 파일들만 모아서 index.json 업데이트
+        // 4️⃣ 모든 데이터가 성공적으로 준비되었을 때만 실제 폴더 교체
         if (savedFiles.length > 0) {
-            writeIndex(savedFiles);
-            console.log("--- 모든 작업 완료 ---");
+            await finalizeTokens(savedFiles);
         } else {
-            console.log("--- 저장된 토큰 파일이 없습니다 ---");
+            console.warn("추출된 데이터가 없어 교체를 중단합니다.");
+            fs.rmSync(TEMP_TOKENS_DIR, { recursive: true, force: true });
         }
 
         return savedFiles;
     } catch (error) {
-        console.warn("Figma 파일를 가져오는데 실패했습니다:", error);
+        // ❌ 에러 발생 시: 임시 폴더만 지우고 종료 (기존 데이터 보존)
+        console.error("❌ 작업 중 에러 발생. 기존 데이터를 보존합니다.");
+        console.error("사유:", error instanceof Error ? error.message : error);
+
+        if (fs.existsSync(TEMP_TOKENS_DIR)) {
+            fs.rmSync(TEMP_TOKENS_DIR, { recursive: true, force: true });
+        }
         return [];
     }
 }

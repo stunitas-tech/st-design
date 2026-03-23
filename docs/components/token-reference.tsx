@@ -3,29 +3,48 @@ export const dynamic = "force-dynamic";
 import TokenRow from "./token-row";
 import { getTokens } from "./tokens";
 
-export type TokenType = "palette" | "semantic" | "dimension" | "all";
+interface TokenReferenceProps {
+    filter?: string;
+    search?: string;
+    /** 토큰 카테고리 렌더링 순서 (예: ["palette", "dimension"]) */
+    order?: string[];
+}
 
 export async function TokenReference({
     filter,
     search,
-}: {
-    filter?: TokenType;
-    search?: string;
-}) {
+    order = [], // 기본값은 빈 배열
+}: TokenReferenceProps) {
     const tokenMap = await getTokens();
     const searchKeyword = search?.toLowerCase().trim();
 
-    // 1️⃣ 먼저 모든 카테고리에서 검색어에 맞는 아이템들을 하나의 배열로 합칩니다.
-    const filteredItems = Object.keys(tokenMap)
+    // 1️⃣ 정렬 기준 결정: order가 있으면 order 기준, 없으면 기존 key 기준
+    const allCategories = Object.keys(tokenMap);
+
+    // order에 포함된 것들을 먼저 배치하고, 명시되지 않은 나머지는 뒤로 보냄
+    const sortedCategories =
+        order.length > 0
+            ? [
+                  ...order.filter((cat) => allCategories.includes(cat)),
+                  ...allCategories.filter((cat) => !order.includes(cat)),
+              ]
+            : allCategories;
+
+    // 2️⃣ 결정된 카테고리 순서대로 데이터를 플랫하게 합침
+    const filteredItems = sortedCategories
         .filter((key) => !filter || filter === "all" || key === filter) // 카테고리 필터
         .flatMap((category) =>
-            (tokenMap[category] || []).map((item) => ({ ...item, category })),
+            (tokenMap[category] || []).map((item: any) => ({
+                ...item,
+                category,
+            })),
         )
         .filter(
             (item) =>
                 !searchKeyword ||
                 item.name?.toLowerCase().includes(searchKeyword),
         ); // 검색어 필터
+
     return (
         <table>
             <colgroup>
@@ -48,7 +67,6 @@ export async function TokenReference({
                         </td>
                     </tr>
                 ) : (
-                    // 3️⃣ 데이터가 있을 때 리스트 렌더링
                     filteredItems.map((item) => (
                         <TokenRow
                             key={`${item.category}-${item.name}`}

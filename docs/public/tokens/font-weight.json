@@ -1,0 +1,22 @@
+[
+  {
+    "name": "regular",
+    "type": "Number",
+    "value": "400"
+  },
+  {
+    "name": "medium",
+    "type": "Number",
+    "value": "500"
+  },
+  {
+    "name": "semibold",
+    "type": "Number",
+    "value": "600"
+  },
+  {
+    "name": "bold",
+    "type": "Number",
+    "value": "700"
+  }
+]

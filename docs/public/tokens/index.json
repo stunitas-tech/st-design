@@ -1,16 +1,24 @@
 {
   "resources": [
     {
+      "path": "/semantic-color.json",
+      "name": "semantic-color"
+    },
+    {
       "path": "/palette.json",
       "name": "palette"
     },
     {
-      "path": "/semantic.json",
-      "name": "semantic"
-    },
-    {
       "path": "/dimension.json",
       "name": "dimension"
+    },
+    {
+      "path": "/font-weight.json",
+      "name": "font-weight"
+    },
+    {
+      "path": "/font-lineheight.json",
+      "name": "font-lineheight"
     }
   ]
 }

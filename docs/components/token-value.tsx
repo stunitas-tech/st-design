@@ -1,14 +1,21 @@
 "use client";
 
-import { RulerDimensionLine } from "lucide-react";
+import {
+    ALargeSmall,
+    ListChevronsUpDown,
+    RulerDimensionLine,
+    WholeWord,
+} from "lucide-react";
 import { AlphaGrid } from "./alpha-grid";
 import { Token } from "./tokens";
 
 export default function TokenValue({
     item,
+    category,
     alias = false,
 }: {
     item: Token;
+    category?: string;
     alias?: boolean;
 }) {
     const value = item?.value?.split(" ")[0];
@@ -16,9 +23,24 @@ export default function TokenValue({
     const perNum = per?.replace(/[()]/g, "") || "100%";
     const isPercent = perNum && perNum !== "100%";
     const isOpacity = item?.name?.includes("Opacity");
+    const isSpacing = category?.includes("spacing");
+    const isWeight = category?.includes("weight");
+    const isLineHeight =
+        category?.includes("line") && category?.includes("height");
     const isColor = value?.startsWith("#");
     const isAlias = !alias && item?.alias;
-    const isPixel = !isColor && !isOpacity && !isAlias;
+    const isPixel =
+        !isColor && !isOpacity && !isAlias && !isWeight && !isLineHeight;
+
+    const iconClassName = "inline-block size-5 shrink-0";
+    let icon = <RulerDimensionLine className={iconClassName} />;
+    if (isLineHeight) {
+        icon = <ListChevronsUpDown className={iconClassName} />;
+    } else if (isWeight) {
+        icon = <ALargeSmall className={iconClassName} />;
+    } else if (isSpacing) {
+        icon = <WholeWord className={iconClassName} />;
+    }
 
     return (
         <div className="flex items-center gap-2">
@@ -36,13 +58,14 @@ export default function TokenValue({
                     ></span>
                 </AlphaGrid>
             ) : (
-                <RulerDimensionLine className="inline-block size-5 shrink-0" />
+                icon
             )}
             <span className="font-mono text-xs">
                 {isPixel ? Number(value) / 10 : isAlias ? item?.alias : value}
                 {isPercent && ` ${per}`}
                 {isOpacity && "%"}
                 {isPixel && `rem (${value}px)`}
+                {isLineHeight && "%"}
             </span>
         </div>
     );
