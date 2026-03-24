@@ -119,12 +119,17 @@ function docsPush(): void {
         execSync(`git push origin ${branchName}`, { stdio: "inherit" });
 
         try {
+            console.log("📝 Pull Request 생성 및 라벨 등록 중...");
+            // 🔥 --label "design" 옵션을 추가하여 슬랙 알림을 트리거합니다.
             execSync(
-                `gh pr create --base ${defaultBranch} --head ${branchName} --title "🎨 Design: Document Update (${timestamp})" --body "업데이트된 디자인 문서를 반영합니다."`,
+                `gh pr create --base ${defaultBranch} --head ${branchName} --title "🎨 Design: Document Update (${timestamp})" --body "업데이트된 디자인 문서를 반영합니다." --label "design"`,
                 { stdio: "inherit" },
             );
+            console.log("✅ PR 생성 및 슬랙 알림 전송이 완료되었습니다.");
         } catch (e) {
-            console.log("⚠️ PR 생성 실패 (GitHub에서 수동 생성 가능)");
+            console.log(
+                "⚠️ PR 생성 실패 (라벨이 없거나 gh 설정 문제일 수 있습니다.)",
+            );
         }
 
         // 8. 성공 시 메인 복귀
