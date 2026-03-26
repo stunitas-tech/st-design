@@ -7,7 +7,9 @@
         "docs:install": "bun run install:root && bun run install:docs",
         "docs:dev": "bun run docs:pull && bun run docs:install && bun --cwd docs dev",
         "docs:push": "bun run ./scripts/docs-push.ts",
-        "figma:sync": "bun install && bun run ./scripts/figma-registry.ts"
+        "figma:sync": "bun install && bun run ./scripts/figma-registry.ts",
+        "notion:test": "bun run ./scripts/sync-notion-test.ts",
+        "notion:sync": "bun run ./scripts/sync-notion.ts"
     },
     "version": "0.0.0",
     "private": true,
@@ -16,7 +18,10 @@
     },
     "dependencies": {
         "@figma/rest-api-spec": "^0.35.0",
+        "@notionhq/client": "^5.14.0",
+        "axios": "^1.13.6",
         "figma-api": "^2.1.0-beta",
-        "lucide-react": "^0.563.0"
+        "lucide-react": "^0.563.0",
+        "notion-to-md": "^3.1.9"
     }
 }

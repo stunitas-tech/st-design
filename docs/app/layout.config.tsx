@@ -42,16 +42,16 @@ export const baseOptions: Omit<DocsLayoutProps, "tree"> = {
                     </SidebarTabIconContainer>
                 ),
             },
-            {
-                title: "Gongsoop",
-                description: "공숲을 위한 디자인 언어",
-                url: "/gongsoop",
-                icon: (
-                    <SidebarTabIconContainer className="[--tab-color:var(--design-color)]">
-                        <File />
-                    </SidebarTabIconContainer>
-                ),
-            },
+            // {
+            //     title: "Gongsoop",
+            //     description: "공숲을 위한 디자인 언어",
+            //     url: "/gongsoop",
+            //     icon: (
+            //         <SidebarTabIconContainer className="[--tab-color:var(--design-color)]">
+            //             <File />
+            //         </SidebarTabIconContainer>
+            //     ),
+            // },
         ],
     },
     tabMode: "navbar",
