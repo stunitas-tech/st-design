@@ -4,6 +4,9 @@ on:
     repository_dispatch:
         types: [notion-sync]
 
+permissions:
+    contents: write
+
 jobs:
     sync:
         runs-on: ubuntu-latest
