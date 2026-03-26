@@ -13,7 +13,11 @@ export async function POST() {
         },
     );
 
-    const data = await res.text();
+    const text = await res.text();
 
-    return Response.json({ ok: true, data });
+    return Response.json({
+        ok: true,
+        status: res.status,
+        response: text,
+    });
 }
