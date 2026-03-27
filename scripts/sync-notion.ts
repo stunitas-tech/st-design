@@ -227,8 +227,11 @@ async function syncNotionToMdx() {
 
                     // 컴포넌트 변환
                     updatedContent = updatedContent
+                        // 1. 역슬래시 이스케이프 선처리
                         .replace(/\\</g, "<")
                         .replace(/\\>/g, ">")
+
+                        // 2. @token 컴포넌트 변환 (기존 로직)
                         .replace(/@token\((.*?)\)/g, (match, paramString) => {
                             if (!paramString.trim())
                                 return `<TokenReference />`;
@@ -237,12 +240,26 @@ async function syncNotionToMdx() {
                             );
                             const cat = params.get("category");
                             const src = params.get("search");
-                            return `<TokenReference ${cat ? `category="${cat.trim()}" ` : ""}${src ? `search="${src.trim()}" ` : ""}/>`.replace(
-                                /\s+/g,
-                                " ",
-                            );
+                            return `<TokenReference ${cat ? `category="${cat.trim()}" ` : ""}${src ? `search="${src.trim()}" ` : ""}/>`;
                         })
-                        .replace(/`(<TokenReference.*?\/>)`/g, "$1");
+                        .replace(/`(<TokenReference.*?\/>)`/g, "$1")
+
+                        // 3. 문법 오류 방지를 위한 이스케이프 처리 (순서 중요)
+                        .replace(/&/g, "&amp;") // & -> &amp;
+                        .replace(/{/g, "&#123;") // { -> &#123;
+                        .replace(/}/g, "&#125;") // } -> &#125;
+
+                        // 4. 컴포넌트 태그가 아닌 일반 부등호 처리
+                        // < 뒤에 영문/슬래시가 안 오면 &lt; 로 변경
+                        .replace(/<(?![a-zA-Z/])/g, "&lt;")
+                        // > 앞에 영문/슬래시/따옴표가 없으면 &gt; 로 변경 (태그 닫기 보존)
+                        .replace(/(?<![a-zA-Z/"'])\s*>/g, " &gt;");
+
+                    // 5. 테이블이나 리스트 뒤에 컴포넌트가 붙어있을 경우를 대비해 줄바꿈 정돈
+                    updatedContent = updatedContent.replace(
+                        /\n(<TokenReference)/g,
+                        "\n\n$1",
+                    );
 
                     // 🛠️ MDX 저장 (마지막 세그먼트만 title로 사용)
                     const mdxContent = `---

@@ -37,5 +37,5 @@ jobs:
 
                   DATE=$(TZ=Asia/Seoul date "+%y년 %-m월 %-d일 %-H시 %-M분")
 
-                  git commit -m "노션 문서 내용이 홈페이지에 반영됐어요 ($DATE)" || echo "변경된 데이터가 없습니다 ($DATE)"
+                  git commit -m "노션 문서 내용 반영 ($DATE)" || echo "변경된 데이터가 없습니다 ($DATE)"
                   git push
