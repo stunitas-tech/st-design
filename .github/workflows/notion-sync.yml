@@ -35,19 +35,43 @@ jobs:
 
                   git add .
 
-                  # 변경된 mdx 파일 이름만 추출
-                  FILES=$(git diff --cached --name-only --diff-filter=ACM | \
-                      grep '\.mdx$' | \
-                      xargs -n1 basename | \
-                      paste -sd ", " -)
+                  # 추가/수정 파일
+                  ADDED_FILES=$(git diff --cached --name-only --diff-filter=ACM | \
+                  grep '\.mdx$' || true)
+
+                  ADDED_FILES=$(echo "$ADDED_FILES" | \
+                  xargs -r -n1 basename | \
+                  paste -sd ", " -)
+
+                  # 삭제 파일
+                  DELETED_FILES=$(git diff --cached --name-only --diff-filter=D | \
+                  grep '\.mdx$' || true)
+
+                  DELETED_FILES=$(echo "$DELETED_FILES" | \
+                  xargs -r -n1 basename | \
+                  paste -sd ", " -)
 
                   DATE=$(TZ=Asia/Seoul date "+%y년 %-m월 %-d일 %-H시 %-M분")
 
-                  # 파일 없으면 fallback
-                  if [ -z "$FILES" ]; then
-                      COMMIT_MSG="노션 문서 내용 반영 ($DATE)"
+                  # 메시지 조합
+                  if [ -z "$ADDED_FILES" ] && [ -z "$DELETED_FILES" ]; then
+                  COMMIT_MSG="노션 문서 내용 반영 ($DATE)"
                   else
-                      COMMIT_MSG="[$FILES] 노션 문서 내용 반영 ($DATE)"
+                  PARTS=""
+
+                  if [ -n "$ADDED_FILES" ]; then
+                      PARTS="[$ADDED_FILES]"
+                  fi
+
+                  if [ -n "$DELETED_FILES" ]; then
+                      if [ -n "$PARTS" ]; then
+                      PARTS="$PARTS [삭제: $DELETED_FILES]"
+                      else
+                      PARTS="[삭제: $DELETED_FILES]"
+                      fi
+                  fi
+
+                  COMMIT_MSG="$PARTS 노션 문서 내용 반영 ($DATE)"
                   fi
 
                   git commit -m "$COMMIT_MSG" || echo "변경된 데이터가 없습니다 ($DATE)"
