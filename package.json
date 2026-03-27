@@ -14,7 +14,8 @@
     "version": "0.0.0",
     "private": true,
     "devDependencies": {
-        "@types/node": "^25.0.3"
+        "@types/node": "^25.0.3",
+        "prettier": "^3.8.1"
     },
     "dependencies": {
         "@figma/rest-api-spec": "^0.35.0",

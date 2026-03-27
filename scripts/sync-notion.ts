@@ -3,6 +3,7 @@ import axios from "axios";
 import fs from "fs";
 import { NotionToMarkdown } from "notion-to-md";
 import path from "path";
+import prettier from "prettier";
 
 // --------------------
 // 타입 확장
@@ -269,7 +270,11 @@ description: "${description}"
 
 ${updatedContent}`;
 
-                    fs.writeFileSync(mdxFilePath, mdxContent);
+                    const formatted = await prettier.format(mdxContent, {
+                        parser: "mdx",
+                    });
+
+                    fs.writeFileSync(mdxFilePath, formatted);
 
                     await notion.pages.update({
                         page_id: page.id,

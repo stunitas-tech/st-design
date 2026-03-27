@@ -35,7 +35,20 @@ jobs:
 
                   git add .
 
+                  # 변경된 mdx 파일 이름만 추출
+                  FILES=$(git diff --cached --name-only --diff-filter=ACM | \
+                      grep '\.mdx$' | \
+                      xargs -n1 basename | \
+                      paste -sd ", " -)
+
                   DATE=$(TZ=Asia/Seoul date "+%y년 %-m월 %-d일 %-H시 %-M분")
 
-                  git commit -m "노션 문서 내용 반영 ($DATE)" || echo "변경된 데이터가 없습니다 ($DATE)"
+                  # 파일 없으면 fallback
+                  if [ -z "$FILES" ]; then
+                      COMMIT_MSG="노션 문서 내용 반영 ($DATE)"
+                  else
+                      COMMIT_MSG="[$FILES] 노션 문서 내용 반영 ($DATE)"
+                  fi
+
+                  git commit -m "$COMMIT_MSG" || echo "변경된 데이터가 없습니다 ($DATE)"
                   git push
