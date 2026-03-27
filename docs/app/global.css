@@ -74,9 +74,25 @@
 
     /* 3. 영역 이름(Areas) 설정: 가시적으로 매칭 */
     grid-template-areas:
-        "header      header      header      header      header"
+        ".      header      header      header      ."
         "toc-popover toc-popover toc-popover toc-popover toc-popover"
-        "sidebar     sidebar     main        toc         ." !important;
+        ".     sidebar     main        toc         ." !important;
+}
+
+#nd-notebook-layout > header > div {
+    position: relative;
+    overflow: visible;
+}
+#nd-notebook-layout > header > div::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-fd-border);
+    width: 100vw;
+    height: 1px;
+    pointer-events: none;
 }
 
 @media (max-width: 1279px) {

@@ -1,5 +1,5 @@
 {
     "title": "Foundation",
     "description": "foundation",
-    "pages": ["..."]
+    "pages": ["design-token", "design-token-reference", "color", "..."]
 }
