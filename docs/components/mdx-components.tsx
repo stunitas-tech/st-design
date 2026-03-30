@@ -18,6 +18,7 @@ import { Download, FileText } from "lucide-react";
 import type { MDXComponents } from "mdx/types";
 import { ComponentExample } from "./component-example";
 import { MdxExample } from "./mdx-example";
+import { ProgressBoardTable } from "./progress-board-table";
 
 const generator = createGenerator({
     // set a cache, necessary for serverless platform like Vercel
@@ -54,6 +55,7 @@ export const mdxComponents: MDXComponents = {
     Files,
     Accordion,
     Accordions,
+    ProgressBoardTable,
     CodeBlock,
     Pre,
     TypeTable,
