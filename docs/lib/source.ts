@@ -1,6 +1,6 @@
 import { type InferPageType, loader } from "fumadocs-core/source";
 import { lucideIconsPlugin } from "fumadocs-core/source/lucide-icons";
-import { docs, gongsoop } from "fumadocs-mdx:collections/server";
+import { docs, gongsoop, react } from "fumadocs-mdx:collections/server";
 
 // See https://fumadocs.dev/docs/headless/source-api for more info
 export function getPageImage(page: InferPageType<typeof docsSource>) {
@@ -23,6 +23,12 @@ export async function getLLMText(page: InferPageType<typeof docsSource>) {
 export const docsSource = loader({
     baseUrl: "/docs",
     source: docs.toFumadocsSource(),
+    plugins: [lucideIconsPlugin()],
+});
+
+export const reactSource = loader({
+    baseUrl: "/react",
+    source: react.toFumadocsSource(),
     plugins: [lucideIconsPlugin()],
 });
 

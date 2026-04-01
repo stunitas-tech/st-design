@@ -24,6 +24,19 @@ export const docs = defineDocs({
     },
 });
 
+export const react = defineDocs({
+    dir: "content/react", // content/react 폴더를 감시합니다.
+    docs: {
+        schema: frontmatterSchema,
+        postprocess: {
+            includeProcessedMarkdown: true,
+        },
+    },
+    meta: {
+        schema: metaSchema,
+    },
+});
+
 export const gongsoop = defineDocs({
     dir: "content/gongsoop", // content/gongsoop 폴더를 감시합니다.
     docs: {

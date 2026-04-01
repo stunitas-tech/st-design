@@ -1,8 +1,8 @@
 import { getGitHubSourceUrl } from "@/app/_llms/config";
 import { mdxComponents } from "@/components/mdx-components";
 import { LLMOptions, ViewOptions } from "@/components/page-actions";
-import { docsSource, getPageImage } from "@/lib/source";
-import { findSiblings } from "fumadocs-core/page-tree";
+
+import { getPageImage, reactSource } from "@/lib/source";
 import { Card, Cards } from "fumadocs-ui/components/card";
 import {
     DocsBody,
@@ -10,12 +10,13 @@ import {
     DocsPage,
     DocsTitle,
 } from "fumadocs-ui/layouts/notebook/page";
+
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
     const params = await props.params;
-    const page = docsSource.getPage(params.slug);
+    const page = reactSource.getPage(params.slug);
     if (!page) notFound();
 
     const MDX = page.data.body;
@@ -23,18 +24,25 @@ export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
     const slugsWithExt = page.slugs.map((s, i) =>
         i === page.slugs.length - 1 ? `${s}.txt` : s,
     );
-    const markdownUrl = `/llms/docs/${slugsWithExt.join("/")}`;
+    const markdownUrl = `/llms/react/${slugsWithExt.join("/")}`;
 
     return (
-        <DocsPage toc={page.data.toc} full={page.data.full}>
+        <DocsPage
+            toc={page.data.toc}
+            tableOfContent={{
+                style: "clerk",
+                single: false,
+            }}
+            full={page.data.full}
+        >
             <DocsTitle>{page.data.title}</DocsTitle>
-            <DocsDescription>{page.data.description || ""}</DocsDescription>
+            <DocsDescription>{page.data.description}</DocsDescription>
 
             <div className="flex flex-row gap-2 items-center mb-3 justify-end">
                 <LLMOptions markdownUrl={markdownUrl} />
                 <ViewOptions
                     markdownUrl={markdownUrl}
-                    githubUrl={getGitHubSourceUrl("docs", page.path)}
+                    githubUrl={getGitHubSourceUrl("react", page.path)}
                 />
             </div>
             <DocsBody className="prose-p:break-keep prose-p:text-pretty prose-headings:text-balance">
@@ -52,34 +60,30 @@ export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
 }
 
 function DocsCategory({ url }: { url: string }) {
+    const pages = reactSource.getPages();
     return (
         <Cards>
-            {findSiblings(docsSource.getPageTree(), url).map((item) => {
-                if (item.type === "separator") return;
-                if (item.type === "folder") {
-                    if (!item.index) return;
-                    item = item.index;
-                }
-
-                return (
-                    <Card key={item.url} title={item.name} href={item.url}>
-                        {item.description}
-                    </Card>
-                );
-            })}
+            {pages.map((page) => (
+                <Card
+                    key={page.url}
+                    title={page.data.title}
+                    description={page.data.description || "문서 보기"}
+                    href={page.url}
+                />
+            ))}
         </Cards>
     );
 }
 
 export async function generateStaticParams() {
-    return docsSource.generateParams();
+    return reactSource.generateParams();
 }
 
 export async function generateMetadata(
     props: PageProps<"/docs/[[...slug]]">,
 ): Promise<Metadata> {
     const params = await props.params;
-    const page = docsSource.getPage(params.slug);
+    const page = reactSource.getPage(params.slug);
     if (!page) notFound();
 
     return {

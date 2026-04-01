@@ -1,3 +1,4 @@
+import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { RootProvider } from "fumadocs-ui/provider/next";
@@ -20,6 +21,7 @@ export default async function Layout({ children }: LayoutProps<"/">) {
             <body className="flex flex-col min-h-screen">
                 <RootProvider>
                     <TooltipProvider>{children}</TooltipProvider>
+                    <Toaster position="bottom-center" />
                 </RootProvider>
             </body>
         </html>

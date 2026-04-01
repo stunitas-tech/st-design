@@ -1,4 +1,4 @@
-import { docsSource, gongsoopSource } from "@/lib/source";
+import { docsSource, gongsoopSource, reactSource } from "@/lib/source";
 import clsx from "clsx";
 import type { DocsLayoutProps } from "fumadocs-ui/layouts/notebook";
 import { File } from "lucide-react";
@@ -43,6 +43,16 @@ export const baseOptions: Omit<DocsLayoutProps, "tree"> = {
                 ),
             },
             // {
+            //     title: "React",
+            //     description: "React 라이브러리",
+            //     url: "/react",
+            //     icon: (
+            //         <SidebarTabIconContainer className="[--tab-color:var(--design-color)]">
+            //             <File />
+            //         </SidebarTabIconContainer>
+            //     ),
+            // },
+            // {
             //     title: "Gongsoop",
             //     description: "공숲을 위한 디자인 언어",
             //     url: "/gongsoop",
@@ -84,6 +94,12 @@ export const docsOptions: DocsLayoutProps = {
     ...baseOptions,
     tree: docsSource.pageTree,
 
+    // tree: await source.getTransformedPageTree(),
+};
+
+export const reactOptions: DocsLayoutProps = {
+    ...baseOptions,
+    tree: reactSource.pageTree,
     // tree: await source.getTransformedPageTree(),
 };
 
