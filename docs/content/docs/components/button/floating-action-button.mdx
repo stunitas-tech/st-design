@@ -45,9 +45,9 @@ Extended Property를 켜면 텍스트를 표시할 수 있습니다. 이를 통�
 
 ![image.png](/images/docs/components/button/floating-action-button/image-4.png)
 
-# Guidelines
+## Guidelines
 
-## Hierarchy
+### Hierarchy
 
 플로팅 액션 버튼은 화면 내 다른 콘텐츠보다 항상 시각적으로 우위에 있어야 합니다. 페이지 스크롤 시에도 고정된 위치를 유지해야 합니다
 
@@ -60,19 +60,19 @@ Extended Property를 켜면 텍스트를 표시할 수 있습니다. 이를 통�
 | Page Content           | 기본              | 기본                   | 화면 가장 아래 레이어            |
 | Scrim/Dimmer           | 높음              | FAB 위                 | 상황에 따라 변경                 |
 
-## Floating Action Button의 위치
+### Floating Action Button의 위치
 
 화면 우측 하단 여백을 유지하며 고정된(Fixed) 위치에 배치합니다.
 
 ![image.png](/images/docs/components/button/floating-action-button/image-6.png)
 
-## Scroll Behavior
+### Scroll Behavior
 
 Anchor 기능을 제공하는 버튼의 경우 위로 스크롤 시에는 숨김 처리 됩니다.
 
 ![image.png](/images/docs/components/button/floating-action-button/image-7.png)
 
-## Label
+### Label
 
 Extended 타입의 플로팅 액션 버튼에 적용되는 너비 제한입니다.
 
@@ -81,11 +81,11 @@ Extended 타입의 플로팅 액션 버튼에 적용되는 너비 제한입니�
 텍스트 길이가 가변적일 경우를 대비하여 최대 너비(Max-width)를 지정하여 디자인이 깨지지 않도록 합니다.
 텍스트가 최대 너비를 초과할 경우 미노출 처리됩니다.
 
-# Usage
+## Usage
 
-## Specification \*웅
+### Specification
 
-### base
+base
 
 | **상태** | **슬롯**  | **속성**        | **값**                           |
 | -------- | --------- | --------------- | -------------------------------- |
@@ -96,7 +96,7 @@ Extended 타입의 플로팅 액션 버튼에 적용되는 너비 제한입니�
 | Default  | Container | justify-content | center                           |
 | Default  | Container | position        | fixed                            |
 
-### Variant \*웅
+Variant
 
 버튼의 시각적 형태를 결정하는 스타일 속성으로, HTML 클래스(예: `.btn-solid`, `.btn-outline`)를 통해 제어합니다.
 
@@ -108,7 +108,7 @@ Extended 타입의 플로팅 액션 버튼에 적용되는 너비 제한입니�
 | Outline  | Container | `background-color` | `--color-semantic-bg-default`    |
 | Outline  | Icon      | `icon-color`       | `--color-semantic-icon-inverted` |
 
-### Size
+Size
 
 크기와 타입(Standard, Extended)에 따른 여백 및 치수 사양입니다.
 
