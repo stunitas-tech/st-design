@@ -1,0 +1,87 @@
+---
+title: "Bottom Sheet"
+description: "사용자가 현재 맥락과 밀접한 관련이 있는 범위가 정해진 작업을 수행할 수 있도록 돕는 요소입니다. 모바일 화면 하단에 오버레이되어 추가적인 사항이나 액션을 표시합니다."
+---
+
+## Anatomy
+
+[embed]()
+
+![image.png](/images/docs/components/layout/bottom-sheet/image-0.png)
+
+1. Header(Optional)
+2. Close icon(Optional)
+3. Container
+4. Contents Area
+5. Action Area(Optional)
+6. Backdrop
+
+## Properties
+
+### Header Area property
+
+Header는 Title과 Description으로 구성되며 Description과 Close icon은 노출을 조정할 수 있습니다.
+
+![image.png](/images/docs/components/layout/bottom-sheet/image-1.png)
+
+### Description property
+
+Header를 사용할 경우 Title은 반드시 포함되어야 하고, Description은 부가 설명을 위해 추가할 수 있습니다.
+
+![image.png](/images/docs/components/layout/bottom-sheet/image-2.png)
+
+### Close icon property
+
+Close icon 영역 사용 여부를 제공합니다.
+
+![image.png](/images/docs/components/layout/bottom-sheet/image-3.png)
+
+### CTA Area property
+
+하단 버튼 영역 사용 여부를 제공합니다.
+
+![image.png](/images/docs/components/layout/bottom-sheet/image-4.png)
+
+### Assist-btn property
+
+하단 버튼 영역 내 보조 버튼 사용 여부를 제공합니다.
+
+![image.png](/images/docs/components/layout/bottom-sheet/image-5.png)
+
+## Guidelines
+
+### Bottom Sheet 최대 높이
+
+Sheet의 높이는 디바이스 전체 영역을 기준으로 하되, Status Bar와 하단 Indicator 등 시스템 영역을 제외한 실제 Viewport 기준으로 계산합니다.
+최소 콘텐츠 영역은 15rem 으로 제공되며, 최대 높이는 Viewport의 80%를 넘지 않는 것을 권장합니다.
+이때 콘텐츠가 많아 화면 전체 높이의 80%를 넘는 경우 스크롤보다는 페이지로 표현하는 것을 권장합니다.
+
+![image.png](/images/docs/components/layout/bottom-sheet/image-6.png)
+
+### Bottom Sheet 최대 너비
+
+Bottom Sheet는 화면 너비 좌우 여백 미포함 최대 820px까지 보여집니다.
+
+![image.png](/images/docs/components/layout/bottom-sheet/image-7.png)
+
+### Contents Area
+
+Content Area의 크기는 내부에 담긴 요소들이 차지하는 공간에 따라 결정됩니다.
+
+![image.png](/images/docs/components/layout/bottom-sheet/image-8.png)
+
+## 닫기 동작 방식
+
+bottom sheet는 기본적으로 바깥을 누르면 닫힙니다.필요에 따라 상단이나 하단에 닫는 동작을 추가해 사용합니다.
+
+![image.png](/images/docs/components/layout/bottom-sheet/image-9.png)
+
+## 스크롤 동작 방식
+
+Bottom Sheet의 콘텐츠가 많거나 해상도 등으로 인해 화면 전체 높이의 90%를 넘는 경우 스크롤이 발생합니다. 스크롤은 content area 내에서 발생합니다.
+
+![image.png](/images/docs/components/layout/bottom-sheet/image-10.png)
+
+## Title,Description의 길이
+
+![image.png](/images/docs/components/layout/bottom-sheet/image-11.png) &gt; 🚫 사용자의 이해를 돕기 위해 글이 너무 길어지지 않도록 주의해주세요.
