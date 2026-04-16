@@ -7,8 +7,8 @@
 @source "../../node_modules/fumadocs-ui/dist/**/*.js";
 @custom-variant dark (&:is(.dark *));
 
-#nd-page {
-    gap: 80px;
+#nd-page .\@container {
+    margin-top: calc(80px - 1rem);
 }
 
 :root {
