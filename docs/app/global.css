@@ -7,6 +7,10 @@
 @source "../../node_modules/fumadocs-ui/dist/**/*.js";
 @custom-variant dark (&:is(.dark *));
 
+#nd-page {
+    gap: 80px;
+}
+
 :root {
     --color-fd-background: #ffffff;
     --color-fd-foreground: #0f172a;
