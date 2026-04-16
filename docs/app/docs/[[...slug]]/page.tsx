@@ -30,7 +30,7 @@ export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
             <DocsTitle>{page.data.title}</DocsTitle>
             <DocsDescription>{page.data.description || ""}</DocsDescription>
 
-            <div className="flex flex-row gap-2 items-center mb-3 justify-end">
+            <div className="hidden flex-row gap-2 items-center mb-3 justify-end">
                 <LLMOptions markdownUrl={markdownUrl} />
                 <ViewOptions
                     markdownUrl={markdownUrl}
