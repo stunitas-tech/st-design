@@ -8,13 +8,6 @@ import prettier from "prettier";
 // --------------------
 // Callout 변환
 // --------------------
-const calloutTypeMap: Record<string, string> = {
-    "💡": "info",
-    "⚠️": "warn",
-    "⛔️": "error",
-    "✅": "success",
-};
-
 function transformCallouts(content: string) {
     const lines = content.split("\n");
     let result: string[] = [];
@@ -54,21 +47,38 @@ function convertBufferToCallout(lines: string[]) {
 
     const firstLine = lines[0];
 
-    const match = firstLine.match(/^([^\s]+)\s*(.*)$/);
+    const match = firstLine.match(/^(\S+)\s*(.*)$/);
     let icon = match?.[1] ?? "";
-    let title = match?.[2] ?? "";
+    let rawTitle = match?.[2] ?? "";
 
-    const type = calloutTypeMap[icon] || "info";
+    const normalizeEmoji = (emoji: string) => emoji.replace(/\uFE0F/g, "");
 
-    // 첫 줄에서 아이콘 제거
-    if (match) {
-        lines[0] = title || "";
-    }
+    const stripMarkdown = (text: string) =>
+        text
+            .replace(/\*\*(.*?)\*\*/g, "$1")
+            .replace(/\*(.*?)\*/g, "$1")
+            .replace(/`(.*?)`/g, "$1")
+            .replace(/~~(.*?)~~/g, "$1");
 
-    const body = lines.join("\n").trim();
+    const calloutTypeMap: Record<string, string> = {
+        "💡": "info",
+        "⚠": "warn",
+        "⚠️": "warn",
+        "⛔": "error",
+        "⛔️": "error",
+        "✅": "success",
+    };
 
-    return `<Callout title="${title || ""}" type="${type}">
+    const type = calloutTypeMap[normalizeEmoji(icon)] || "info";
+
+    const title = stripMarkdown(rawTitle);
+
+    const body = lines.length > 1 ? lines.slice(1).join("\n").trim() : "";
+
+    return `<Callout title="${title}" type="${type}">
+
 ${body}
+
 </Callout>`;
 }
 
