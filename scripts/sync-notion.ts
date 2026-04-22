@@ -6,8 +6,72 @@ import path from "path";
 import prettier from "prettier";
 
 // --------------------
-// 타입 확장
+// Callout 변환
 // --------------------
+const calloutTypeMap: Record<string, string> = {
+    "💡": "info",
+    "⚠️": "warn",
+    "⛔️": "error",
+    "✅": "success",
+};
+
+function transformCallouts(content: string) {
+    const lines = content.split("\n");
+    let result: string[] = [];
+
+    let buffer: string[] = [];
+    let inCallout = false;
+
+    for (let line of lines) {
+        if (line.startsWith(">")) {
+            const clean = line.replace(/^>\s?/, "");
+
+            if (!inCallout) {
+                buffer = [];
+                inCallout = true;
+            }
+
+            buffer.push(clean);
+        } else {
+            if (inCallout) {
+                result.push(convertBufferToCallout(buffer));
+                buffer = [];
+                inCallout = false;
+            }
+            result.push(line);
+        }
+    }
+
+    if (inCallout && buffer.length > 0) {
+        result.push(convertBufferToCallout(buffer));
+    }
+
+    return result.join("\n");
+}
+
+function convertBufferToCallout(lines: string[]) {
+    if (!lines.length) return "";
+
+    const firstLine = lines[0];
+
+    const match = firstLine.match(/^([^\s]+)\s*(.*)$/);
+    let icon = match?.[1] ?? "";
+    let title = match?.[2] ?? "";
+
+    const type = calloutTypeMap[icon] || "info";
+
+    // 첫 줄에서 아이콘 제거
+    if (match) {
+        lines[0] = title || "";
+    }
+
+    const body = lines.join("\n").trim();
+
+    return `<Callout title="${title || ""}" type="${type}">
+${body}
+</Callout>`;
+}
+
 interface StrictNotionClient {
     databases: { retrieve: (args: { database_id: string }) => Promise<any> };
     dataSources: {
@@ -227,6 +291,9 @@ async function syncNotionToMdx() {
                     await Promise.allSettled(downloads);
 
                     // 컴포넌트 변환
+
+                    updatedContent = transformCallouts(updatedContent);
+
                     updatedContent = updatedContent
                         // 1. 역슬래시 이스케이프 선처리
                         .replace(/\\</g, "<")
