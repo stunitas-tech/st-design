@@ -56,11 +56,65 @@ Badge는 신규 메뉴, 인기 메뉴 등 사용자의 주목이 필요한 상�
 GNB Menu는 `normal` `hovered` `selected` 상태를 제공합니다.
 선택된 메뉴는 현재 사용자가 위치한 페이지를 인지할 수 있도록 시각적으로 강조합니다.
 
-## **Guidelines**
+## Guideline
+
+### Dropdown 동작 방식
+
+사용자가 GNB 메뉴에 마우스 오버하면 Dropdown이 노출되며 Dropdown 항목을 클릭하면 해당 페이지로 즉시 이동합니다.
+
+![image.png](/images/docs/template/gnb-menu/image-4.png)
+
+Dropdown 자체에는 별도의 선택 상태나 강조 상태를 제공하지 않습니다.
+
+![image.png](/images/docs/template/gnb-menu/image-5.png)
+
+마우스가 GNB 메뉴 또는 Dropdown 영역을 벗어나면 Dropdown은 닫힙니다.
+
+### Dropdown 위치
+
+![image.png](/images/docs/template/gnb-menu/image-6.png)
+
+Dropdown은 세로 목록 형태로 기준 메뉴 텍스트 하단 4px 아래로 노출됩니다.
+
+![image.png](/images/docs/template/gnb-menu/image-7.png)
+
+Dropdown은 메뉴 영역을 기준으로 정렬합니다.
+
+### Dropdown Item
+
+![image.png](/images/docs/template/gnb-menu/image-8.png)
+
+Dropdown 항목은 텍스트 링크로 구성됩니다. 하위 페이지가 2개 이상이고 사용자가 직접 하위 페이지로 이동할 필요가 있는 경우 Dropdown을 사용할 수 있습니다.
+
+![image.png](/images/docs/template/gnb-menu/image-9.png)
+
+항목 수에는 기능적 제한은 없으나, 탐색 부담을 줄이기 위해 5개 이하 노출을 권장합니다. 6개 이상의 하위 메뉴가 필요한 경우 정보 구조를 재검토하거나, 별도 페이지 진입 후 세부 탐색을 제공하는 방식을 권장합니다.
+
+![image.png](/images/docs/template/gnb-menu/image-10.png)
+
+Hover 상태는 사용자의 탐색을 보조하는 임시 상태로만 사용합니다.
+
+### 메뉴 이동 방식
+
+GNB Menu는 사용자가 현재 위치와 이동 가능한 메뉴를 명확히 이해할 수 있도록 동작해야 합니다.
+
+![image.png](/images/docs/template/gnb-menu/image-11.png)
+
+GNB 메뉴 클릭 시 연결된 페이지로 이동합니다.
+
+![image.png](/images/docs/template/gnb-menu/image-12.png)
+
+Dropdown이 있는 경우, Dropdown 항목 클릭 시 현재 창에서 해당 페이지로 이동합니다.
+
+![image.png](/images/docs/template/gnb-menu/image-13.png)
+
+외부 링크나 새 창 이동이 필요한 경우 별도 정책에 따라 처리하며, GNB 기본 동작으로 사용하지 않습니다.
+
+## Usage
 
 ### Menu Usage
 
-![image.png](/images/docs/template/gnb-menu/image-4.png)
+![image.png](/images/docs/template/gnb-menu/image-14.png)
 
 - GNB 내에는 일관된 메뉴 구조를 사용해야 합니다.
 - 하나의 GNB 영역 안에서 메뉴의 크기, 정렬, 상태 표현 방식은 동일하게 유지합니다.
@@ -72,7 +126,7 @@ GNB Menu는 `normal` `hovered` `selected` 상태를 제공합니다.
 
 Label은 메뉴를 식별하는 가장 중요한 요소입니다. 사용자가 메뉴의 목적을 빠르게 이해할 수 있도록 짧고 명확한 텍스트를 사용합니다.
 
-![image.png](/images/docs/template/gnb-menu/image-5.png)
+![image.png](/images/docs/template/gnb-menu/image-15.png)
 
 <Callout title="Label에 직접 컬러를 적용해 메뉴 간 강조도를 다르게 만들지 않습니다." type="error">
 
@@ -84,18 +138,18 @@ Label에 컬러를 사용하면 GNB 내 메뉴 간 위계가 불필요하게 생
 
 Suffix(Badge)는 Label 우측에 붙어 메뉴의 상태를 짧게 전달하는 요소입니다.
 
-![image.png](/images/docs/template/gnb-menu/image-6.png)
+![image.png](/images/docs/template/gnb-menu/image-16.png)
 
 - **New :** 새롭게 추가된 메뉴 또는 신규 기능을 안내할 때 사용합니다.
 - **Hot :** 인기 메뉴나 주목도가 높은 메뉴를 강조할 때 사용합니다.
 
-![image.png](/images/docs/template/gnb-menu/image-7.png)
+![image.png](/images/docs/template/gnb-menu/image-17.png)
 
 <Callout title="신규성, 인기, 업데이트처럼 명확한 상태를 전달할 때 사용하며 사용자가 메뉴의 상태를 빠르게 인지할 수 있도록 Label 바로 뒤에 배치합니다." type="success">
 
 </Callout>
 
-![image.png](/images/docs/template/gnb-menu/image-8.png)
+![image.png](/images/docs/template/gnb-menu/image-18.png)
 
 <Callout title="Don’t  " type="error">
 
@@ -109,7 +163,7 @@ Badge는 사용자의 주의를 끄는 요소이므로, 여러 메뉴에 과도�
 
 Tooltip은 사용자에게 메뉴에 대한 추가 정보를 선제적으로 제공할 때 사용합니다.
 
-![image.png](/images/docs/template/gnb-menu/image-9.png)
+![image.png](/images/docs/template/gnb-menu/image-19.png)
 
 <Callout title="Do  " type="success">
 
@@ -117,7 +171,7 @@ Tooltip은 사용자에게 메뉴에 대한 추가 정보를 선제적으로 제
 
 </Callout>
 
-![image.png](/images/docs/template/gnb-menu/image-10.png)
+![image.png](/images/docs/template/gnb-menu/image-20.png)
 
 <Callout title="Don’t  " type="error">
 
@@ -135,7 +189,7 @@ Prefix icon은 메뉴의 의미를 보조하는 요소이므로 일반적인 GNB
 
 </Callout>
 
-![image.png](/images/docs/template/gnb-menu/image-11.png)
+![image.png](/images/docs/template/gnb-menu/image-21.png)
 
 <Callout title="Do  " type="success">
 
@@ -143,7 +197,7 @@ Prefix icon은 메뉴의 의미를 보조하는 요소이므로 일반적인 GNB
 
 </Callout>
 
-![image.png](/images/docs/template/gnb-menu/image-12.png)
+![image.png](/images/docs/template/gnb-menu/image-22.png)
 
 <Callout title="Don’t  " type="error">
 
@@ -155,15 +209,15 @@ Prefix icon은 메뉴의 의미를 보조하는 요소이므로 일반적인 GNB
 
 모바일 GNB는 Tab 컴포넌트의 속성을 기반으로 구성하지만 서비스의 주요 진입점으로 사용되는 메인 GNB는 별도 컴포넌트로 관리합니다.
 
-![image.png](/images/docs/template/gnb-menu/image-13.png)
+![image.png](/images/docs/template/gnb-menu/image-23.png)
 
 메인 GNB는 일반 Tab과 달리 다음 특성을 가집니다.
 
-![image.png](/images/docs/template/gnb-menu/image-14.png)
+![image.png](/images/docs/template/gnb-menu/image-24.png)
 
 텍스트 컬러는 Primary 컬러를 일괄 적용할 수 있습니다.
 
-![image.png](/images/docs/template/gnb-menu/image-15.png)
+![image.png](/images/docs/template/gnb-menu/image-25.png)
 
 메뉴 상태나 신규 진입 여부를 전달하기 위해 Suffix(Badge)를 사용할 수 있습니다.
 
@@ -171,11 +225,11 @@ Prefix icon은 메뉴의 의미를 보조하는 요소이므로 일반적인 GNB
 
 모바일 GNB에서 2Depth 메뉴가 노출되는 경우 일반 Tab 구조를 기반으로 사용합니다. 이 때 2Depth 메뉴는 메인 GNB의 하위 탐색을 보조하는 역할로 사용합니다.
 
-![image.png](/images/docs/template/gnb-menu/image-16.png)
+![image.png](/images/docs/template/gnb-menu/image-26.png)
 
 2Depth 메뉴에서는 하단 Bar를 사용하지 않습니다.
 
-![image.png](/images/docs/template/gnb-menu/image-17.png)
+![image.png](/images/docs/template/gnb-menu/image-27.png)
 
 텍스트 컬러는 기존 Tab의 enabled 상태 컬러를 유지합니다.
 
@@ -189,45 +243,9 @@ Dropdown은 PC 환경에서만 사용합니다. Dropdown은 사용자가 상위 
 
 </Callout>
 
-![image.png](/images/docs/template/gnb-menu/image-18.png)
+![image.png](/images/docs/template/gnb-menu/image-28.png)
 
 사용자가 상위 메뉴를 거치지 않고 하위 메뉴로 바로 이동해야 할 때 사용하며, 단일 목적지로 이동하는 메뉴에는 Dropdown을 제공하지 않습니다.
-
-### Dropdown Behavior
-
-사용자가 GNB 메뉴에 마우스 오버하면 Dropdown이 노출되며 Dropdown 항목을 클릭하면 해당 페이지로 즉시 이동합니다.
-
-![image.png](/images/docs/template/gnb-menu/image-19.png)
-
-Dropdown 자체에는 별도의 선택 상태나 강조 상태를 제공하지 않습니다.
-
-![image.png](/images/docs/template/gnb-menu/image-20.png)
-
-마우스가 GNB 메뉴 또는 Dropdown 영역을 벗어나면 Dropdown은 닫힙니다.
-
-### Dropdown Layout
-
-![image.png](/images/docs/template/gnb-menu/image-21.png)
-
-Dropdown은 세로 목록 형태로 기준 메뉴 텍스트 하단 4px 아래로 노출됩니다.
-
-![image.png](/images/docs/template/gnb-menu/image-22.png)
-
-Dropdown은 메뉴 영역을 기준으로 정렬합니다.
-
-### PC Dropdown Item
-
-![image.png](/images/docs/template/gnb-menu/image-23.png)
-
-Dropdown 항목은 텍스트 링크로 구성됩니다. 하위 페이지가 2개 이상이고 사용자가 직접 하위 페이지로 이동할 필요가 있는 경우 Dropdown을 사용할 수 있습니다.
-
-![image.png](/images/docs/template/gnb-menu/image-24.png)
-
-항목 수에는 기능적 제한은 없으나, 탐색 부담을 줄이기 위해 5개 이하 노출을 권장합니다. 6개 이상의 하위 메뉴가 필요한 경우 정보 구조를 재검토하거나, 별도 페이지 진입 후 세부 탐색을 제공하는 방식을 권장합니다.
-
-![image.png](/images/docs/template/gnb-menu/image-25.png)
-
-Hover 상태는 사용자의 탐색을 보조하는 임시 상태로만 사용합니다.
 
 ### Platform Usage
 
@@ -238,29 +256,13 @@ GNB Menu는 PC와 모바일에서 동일한 메뉴 구조를 공유할 수 있�
 | PC       | Mouse Hover를 통한 Dropdown 노출을 사용할 수 있습니다.                                       |
 | Mobile   | Hover interaction이 없으므로 Dropdown을 사용하지 않고, 필요한 경우 2Depth 메뉴로 제공합니다. |
 
-![image.png](/images/docs/template/gnb-menu/image-26.png)
+![image.png](/images/docs/template/gnb-menu/image-29.png)
 
 PC에서는 하위 메뉴가 있는 경우 Dropdown을 통해 빠른 이동을 지원합니다.
 
-![image.png](/images/docs/template/gnb-menu/image-27.png)
-
-모바일에서는 Dropdown 대신 2Depth 메뉴 구조로 하위 탐색을 제공합니다.
-
-### Interaction Rule
-
-GNB Menu는 사용자가 현재 위치와 이동 가능한 메뉴를 명확히 이해할 수 있도록 동작해야 합니다.
-
-![image.png](/images/docs/template/gnb-menu/image-28.png)
-
-GNB 메뉴 클릭 시 연결된 페이지로 이동합니다.
-
-![image.png](/images/docs/template/gnb-menu/image-29.png)
-
-Dropdown이 있는 경우, Dropdown 항목 클릭 시 현재 창에서 해당 페이지로 이동합니다.
-
 ![image.png](/images/docs/template/gnb-menu/image-30.png)
 
-외부 링크나 새 창 이동이 필요한 경우 별도 정책에 따라 처리하며, GNB 기본 동작으로 사용하지 않습니다.
+모바일에서는 Dropdown 대신 2Depth 메뉴 구조로 하위 탐색을 제공합니다.
 
 ## Emphasis Rule
 
