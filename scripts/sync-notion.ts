@@ -82,6 +82,88 @@ ${body}
 </Callout>`;
 }
 
+// --------------------
+// Notion column_list → FlexColumns MDX
+// --------------------
+type NotionBlock = { id: string; type: string; has_children?: boolean };
+
+async function listBlockChildren(
+    notionClient: Client,
+    blockId: string,
+): Promise<NotionBlock[]> {
+    const results: NotionBlock[] = [];
+    let cursor: string | undefined;
+
+    while (true) {
+        const res = await notionClient.blocks.children.list({
+            block_id: blockId,
+            start_cursor: cursor,
+        });
+        results.push(...(res.results as NotionBlock[]));
+        if (!res.has_more) break;
+        cursor = res.next_cursor ?? undefined;
+    }
+
+    return results;
+}
+
+function wrapFlexColumns(columnContents: string[]): string {
+    const cols = columnContents
+        .map(
+            (col) => `<FlexColumn>
+
+${col}
+
+</FlexColumn>`,
+        )
+        .join("\n\n");
+
+    return `<FlexColumns>
+
+${cols}
+
+</FlexColumns>`;
+}
+
+function setupColumnListTransformer(
+    n2mInstance: NotionToMarkdown,
+    notionClient: Client,
+) {
+    n2mInstance.setCustomTransformer("column_list", async (block: any) => {
+        if (!block.has_children) return "";
+
+        const columnBlocks = await listBlockChildren(notionClient, block.id);
+        const columnContents: string[] = [];
+
+        for (const colBlock of columnBlocks) {
+            if (colBlock.type !== "column") {
+                continue;
+            }
+
+            if (!colBlock.has_children) {
+                columnContents.push("");
+                continue;
+            }
+
+            const colChildren = await listBlockChildren(
+                notionClient,
+                colBlock.id,
+            );
+            const mdBlocks = await n2mInstance.blocksToMarkdown(
+                colChildren as never,
+            );
+            const mdStr = n2mInstance.toMarkdownString(mdBlocks);
+            columnContents.push((mdStr.parent || "").trim());
+        }
+
+        if (columnContents.length < 2) {
+            return columnContents.filter(Boolean).join("\n\n");
+        }
+
+        return wrapFlexColumns(columnContents);
+    });
+}
+
 interface StrictNotionClient {
     databases: { retrieve: (args: { database_id: string }) => Promise<any> };
     dataSources: {
@@ -103,6 +185,7 @@ if (!NOTION_TOKEN) {
 
 const notion = new Client({ auth: NOTION_TOKEN, timeoutMs: 120_000 });
 const n2m = new NotionToMarkdown({ notionClient: notion });
+setupColumnListTransformer(n2m, notion);
 const strictNotion = notion as unknown as StrictNotionClient;
 
 // --------------------
@@ -147,7 +230,7 @@ async function withRetry<T>(fn: () => Promise<T>, retries = 3): Promise<T> {
 // --------------------
 // 이미지 관련 유틸
 // --------------------
-async function downloadImage(url: string, dest: string) {
+async function downloadImage(url: string, dest: string): Promise<void> {
     try {
         const response = await axios({
             url,
@@ -158,13 +241,44 @@ async function downloadImage(url: string, dest: string) {
         });
         const writer = fs.createWriteStream(dest);
         response.data.pipe(writer);
-        return new Promise((resolve, reject) => {
-            writer.on("finish", resolve);
+        return new Promise<void>((resolve, reject) => {
+            writer.on("finish", () => resolve());
             writer.on("error", reject);
         });
     } catch (err: any) {
         throw new Error(`이미지 다운로드 실패: ${err.message}`);
     }
+}
+
+function resolveDocPaths(
+    category: string,
+    slugSegments: string[],
+    fileName: string,
+) {
+    const docsRoot = path.join(process.cwd(), "docs/content/docs");
+    const imagesRoot = path.join(process.cwd(), "docs/public/images/docs");
+
+    if (category === "index") {
+        const imageSubpath = slugSegments.slice(0, -1);
+        return {
+            mdxFilePath: path.join(docsRoot, "index.mdx"),
+            imageDir: path.join(imagesRoot, "index", ...imageSubpath),
+            webImagePrefix: `/images/docs/index${
+                imageSubpath.length ? `/${imageSubpath.join("/")}` : ""
+            }`,
+        };
+    }
+
+    return {
+        mdxFilePath: path.join(
+            docsRoot,
+            category,
+            ...slugSegments.slice(0, -1),
+            `${fileName}.mdx`,
+        ),
+        imageDir: path.join(imagesRoot, category, ...slugSegments),
+        webImagePrefix: `/images/docs/${category}/${slugSegments.join("/")}`,
+    };
 }
 
 async function getAllImageUrls(blockId: string): Promise<string[]> {
@@ -231,18 +345,10 @@ async function syncNotionToMdx() {
             const fileName = slugSegments[slugSegments.length - 1]; // 파일명 (colors)
             const displayTitle = rawSegments[rawSegments.length - 1]; // 실제 타이틀 (Colors)
 
-            const mdxFilePath = path.join(
-                process.cwd(),
-                "docs/content/docs",
+            const { mdxFilePath, imageDir, webImagePrefix } = resolveDocPaths(
                 category,
-                ...slugSegments.slice(0, -1),
-                `${fileName}.mdx`,
-            );
-            const imageDir = path.join(
-                process.cwd(),
-                "docs/public/images/docs",
-                category,
-                ...slugSegments,
+                slugSegments,
+                fileName,
             );
 
             // 🔥 CASE 1: Delete
@@ -290,7 +396,7 @@ async function syncNotionToMdx() {
                             freshUrl.split("?")[0].split(".").pop() || "png";
                         const imgName = `image-${i}.${ext}`;
                         const localPath = path.join(imageDir, imgName);
-                        const webPath = `/images/docs/${category}/${slugSegments.join("/")}/${imgName}`;
+                        const webPath = `${webImagePrefix}/${imgName}`;
 
                         downloads.push(downloadImage(freshUrl, localPath));
                         updatedContent = updatedContent.replace(
@@ -335,7 +441,7 @@ async function syncNotionToMdx() {
 
                     // 5. 테이블이나 리스트 뒤에 컴포넌트가 붙어있을 경우를 대비해 줄바꿈 정돈
                     updatedContent = updatedContent.replace(
-                        /\n(<TokenReference)/g,
+                        /\n(<(?:TokenReference|FlexColumns))/g,
                         "\n\n$1",
                     );
 

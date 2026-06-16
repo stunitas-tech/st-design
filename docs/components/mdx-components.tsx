@@ -17,6 +17,7 @@ import defaultMdxComponents from "fumadocs-ui/mdx";
 import { Download, FileText } from "lucide-react";
 import type { MDXComponents } from "mdx/types";
 import { ComponentExample } from "./component-example";
+import { FlexColumn, FlexColumns } from "./flex-columns";
 import { MdxExample } from "./mdx-example";
 import { ProgressBoardTable } from "./progress-board-table";
 
@@ -44,6 +45,8 @@ export const mdxComponents: MDXComponents = {
             {children}
         </div>
     ),
+    FlexColumns,
+    FlexColumn,
 
     // Components
     Tab,
